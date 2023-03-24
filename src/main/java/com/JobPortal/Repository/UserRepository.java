@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.JobPortal.Interface.UserInterface;
 import com.JobPortal.Interface.UserJobInterface;
 import com.JobPortal.Interface.UserPermission;
+import com.JobPortal.Interface.UsersJobsInterface;
 import com.JobPortal.entity.UserEntity;
 
 @Repository
@@ -36,6 +37,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>{
 	
 	@Query(value = "select u.name, u.email, u.city, u.state , u.mobile_no from user_entity u",nativeQuery = true)
 	Page<UserInterface> findAll(Pageable pageable, Class<UserInterface> class1);
+	
+	@Query(value = "select u.name ,u.email, j.company, j.jobs, j.role from user_entity u\r\n"
+			+ "join user_jobs_entity uje on uje.user_entity_id = u.id\r\n"
+			+ "join jobs_entity j on j.id = uje.job_entity_id",nativeQuery = true)
+	List<UsersJobsInterface> findAll(Class<UsersJobsInterface>class1);
 	
 	
 	

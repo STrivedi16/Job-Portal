@@ -11,6 +11,9 @@ public class SuccessMessageKey {
 	private static final String ROLE_PERMISSION="15";
 	private static final String JOB="16";
 	private static final String USER_JOB="17";
+	private static final String OTP="18";
+	
+	public static final String OTP_M031800=HEADER+OTP+"00";
 	
 	//USER
 	public static final String USER_MO311OO=HEADER+USER+"00";// login successfull
@@ -38,4 +41,5 @@ public class SuccessMessageKey {
 	public static final String USER_JOB_M031701=HEADER+USER_JOB+"01"; // user job added
 	public static final String USER_JOB_M031702=HEADER+USER_JOB+"02";	/// user job fetched;
 	public static final String USER_JOB_M031703=HEADER+USER_JOB+"03";	// user jobs remove
+	public static final String USER_JOB_M031704=HEADER+USER_JOB+"04";	//user job status update 
 }

@@ -42,5 +42,5 @@ public class ErrorMessageKey {
 	public static final String JOB_E031603=HEADER+JOB+"03";// job not delete
 	public static final String USER_JOB_E031701=HEADER+USER_JOB+"01"; // user job not  added
 	public static final String USER_JOB_E031702=HEADER+USER_JOB+"02";	/// user job  not remove;
-	
+	public static final String USER_JOB_E031704=HEADER+USER_JOB+"04";//user job status 
 }

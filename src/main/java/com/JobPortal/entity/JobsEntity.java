@@ -52,6 +52,20 @@ public class JobsEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "jobEntity")
 	private List<UserJobsEntity> userJobsEntities;
+	
+	private long createdBy;
+	
+	
+	
+	
+
+	public long getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(long createdBy) {
+		this.createdBy = createdBy;
+	}
 
 	public long getId() {
 		return id;
@@ -184,9 +198,10 @@ public class JobsEntity {
 	}
 
 	
+	
 	public JobsEntity(long id, String jobs, String role, String discription, String salary, String company,
-			String requirement, Timestamp creationTime, Timestamp updationTime, boolean is_active,
-			List<UserJobsEntity> userJobsEntities) {
+			String requirement, Timestamp dueDate, String helplineDetails, Timestamp creationTime,
+			Timestamp updationTime, boolean is_active, List<UserJobsEntity> userJobsEntities, long createdBy) {
 		super();
 		this.id = id;
 		this.jobs = jobs;
@@ -195,10 +210,13 @@ public class JobsEntity {
 		this.salary = salary;
 		this.company = company;
 		this.requirement = requirement;
+		this.dueDate = dueDate;
+		this.helplineDetails = helplineDetails;
 		this.creationTime = creationTime;
 		this.updationTime = updationTime;
 		this.is_active = is_active;
 		this.userJobsEntities = userJobsEntities;
+		this.createdBy = createdBy;
 	}
 
 	public JobsEntity() {

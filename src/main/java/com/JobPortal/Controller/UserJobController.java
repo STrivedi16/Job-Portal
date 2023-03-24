@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,8 @@ import com.JobPortal.Config.JwtFilter;
 import com.JobPortal.Dto.UserJobDto;
 import com.JobPortal.Interface.UserInterface;
 import com.JobPortal.Interface.UserJobInterface;
+import com.JobPortal.Interface.UsersJobsInterface;
+import com.JobPortal.OTP.EmailService;
 import com.JobPortal.Responce.ErrorMessage;
 import com.JobPortal.Responce.ErrorMessageConstant;
 import com.JobPortal.Responce.ErrorMessageKey;
@@ -25,6 +28,7 @@ import com.JobPortal.Responce.SuccessMessage;
 import com.JobPortal.Responce.SuccessMessageConstant;
 import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Service.UserJobService;
+import com.JobPortal.entity.UserJobsEntity;
 
 @RestController
 public class UserJobController {
@@ -34,6 +38,9 @@ public class UserJobController {
 	
 	@Autowired
 	private JwtFilter filter;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@PostMapping("/applyforjob")
 	@PreAuthorize("hasAuthority	('applyforJobs')")
@@ -118,7 +125,58 @@ public class UserJobController {
 		}
 	}
 	
+	
+	@PatchMapping("/userjobStatus/{id}")
+	@PreAuthorize("hasAuthority	('CandidateReview')")
+	public ResponseEntity<?> updateStatus(@PathVariable("id") long id , @RequestBody UserJobDto  dto)
+	{
+		try {
+			
+			System.err.println("aaaaasassasasa");
+			
+			UserJobsEntity entity=this.jobService.updateStatus(id, dto);
+			
+			String message="<h3> Hello "+" "+entity.getUserEntity().getName()+"</h3><br> "+
+			"<h4><p>"+"Your application status "+" of "+entity.getJobEntity().getCompany()+ " as "+entity.getJobEntity().getJobs() + "  has been Updated to "+"</h4></p>"+
+			"<h2><b> "+ entity.getStatus()+"</h2></b>"
+			;
+			
+			
+			String subject="Application Status Change";
+			
+			System.err.println("aaaaasassasasa");
+			
+			String to=entity.getUserEntity().getEmail();
+			
+			this.emailService.sendOtp(subject, message, to);
+			
+			
+			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOB_STATUS, SuccessMessageKey.USER_JOB_M031704, entity),HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_JOB_STATUS, ErrorMessageKey.USER_JOB_E031704),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 		
+	
+	@GetMapping("/applyCandidate/{id}")
+	@PreAuthorize("hasAuthority	('showUserJobs')")
+	public ResponseEntity<?> getApplyCandidates(@PathVariable("id") long id )
+	{
+		try {
+			List<UsersJobsInterface>  list=this.jobService.getCandidates(id);
+			
+			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOBS, SuccessMessageKey.USER_JOB_M031702, list),HttpStatus.OK);
+		
+		}
+		
+		catch (ResourcesNotFoundException e) {
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.JOB_NOT_FOUND, ErrorMessageKey.JOB_E031602),HttpStatus.BAD_REQUEST);
+
+		}
+	}
+	
 	
 	}
 

@@ -8,6 +8,8 @@ public class SuccessMessageConstant {
 	public static final String UPDATED="updated";
 	public static final String DELETE="delete";
 	
+	public static final String OTP_SENT="otp has been send successfull";
+	
 	//USER
 	public static final String USER_REGISTER="user register sucessfull";
 	public static final String USER_LOGIN="user login successfull";
@@ -34,5 +36,7 @@ public class SuccessMessageConstant {
 	public static final String JOB_REMOVE="job  has been remove successfull";
 	public static final String JOB_UPDATED="job profile has been updated";
 	public static final String JOB_SHOW="jobs details fetched successfull";	
+	public static final String USER_JOB_STATUS="user application status has been update successfull";
+	
 
 }

@@ -39,6 +39,8 @@ public static final String REQUEST_ERROR = "http request not proper";
 	public static final String JOB_NOT_REMOVE="can't remove this job";
 	public static final String JOB_PROFILE_NOT_UPDATE="job profile not update";
 	public static final String JOB_NOT_FOUND="job not found";
+	public static final String USER_JOB_STATUS="status not updated";
+	
 	
 	
 

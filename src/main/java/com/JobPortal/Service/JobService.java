@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.JobPortal.Config.JwtFilter;
 import com.JobPortal.Dto.JobDto;
 import com.JobPortal.Interface.JobInterface;
 import com.JobPortal.Repository.JobRepository;
@@ -21,10 +22,12 @@ public class JobService {
 	@Autowired
 	private JobRepository jobRepository;
 	
-	
+	@Autowired
+	private JwtFilter filter;
 	
 	public JobDto setJob(JobDto dto)
 	{
+		long username=filter.id;
 		JobsEntity entity=new JobsEntity();
 		entity.setJobs(dto.getJob());
 		entity.setDiscription(dto.getDiscription());
@@ -33,6 +36,7 @@ public class JobService {
 		entity.setRole(dto.getRole());
 		entity.setSalary(dto.getSalary());
 		entity.setHelplineDetails(dto.getHelplineDetails());
+		entity.setCreatedBy(username);
 		
 		long validateTime = 1440 * dto.getValidDateTimeInDays();
 		

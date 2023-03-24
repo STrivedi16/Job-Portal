@@ -22,10 +22,25 @@ public class FileController {
 		response.setContentType("appication/octet-stream");
 		
 		String headerKey="Content-Disposition";
-		String headerValue="attachment;filename=data.xls";
+		String headerValue="attachment;filename=userdata.xls";
 		
 		response.setHeader(headerKey, headerValue);
-		this.fileHelperService.getToExcel(response);
+		this.fileHelperService.getAllUser(response);
+	}
+	
+	
+	@GetMapping("/users/jobs")
+	
+	public void excelUserJobs(HttpServletResponse response) throws IOException
+	{
+		response.setContentType("appication/octet-stream");
+		
+		String headerKey="Content-Disposition";
+		String headerValue="attachment;filename=userJobdata.xls";
+		
+		response.setHeader(headerKey, headerValue);
+		this.fileHelperService.getUserJob(response);
+		
 	}
 
 
