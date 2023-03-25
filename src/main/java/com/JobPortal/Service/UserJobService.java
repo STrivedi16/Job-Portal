@@ -1,5 +1,6 @@
 package com.JobPortal.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.message.ReusableMessage;
@@ -8,10 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.JobPortal.Dto.UserJobDto;
 import com.JobPortal.Interface.UserInterface;
 import com.JobPortal.Interface.UserJobInterface;
+import com.JobPortal.Interface.UserProfileInterface;
 import com.JobPortal.Interface.UsersJobsInterface;
 import com.JobPortal.Repository.JobRepository;
 import com.JobPortal.Repository.UserJobRepository;
@@ -20,6 +23,8 @@ import com.JobPortal.Responce.ResourcesNotFoundException;
 import com.JobPortal.entity.JobsEntity;
 import com.JobPortal.entity.UserEntity;
 import com.JobPortal.entity.UserJobsEntity;
+import com.JobPortal.entity.UserProfileJobsResponse;
+import com.netflix.discovery.converters.Auto;
 
 import io.swagger.v3.oas.models.examples.Example;
 
@@ -34,6 +39,9 @@ public class UserJobService {
 	
 	@Autowired
 	private UserJobRepository repository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 
 	
@@ -96,17 +104,140 @@ public class UserJobService {
 		
 	}
 	
-	public List<UsersJobsInterface> getCandidates(long id)
-	{
-		List<UsersJobsInterface>list=this.repository.getApplyCandidates(id, UsersJobsInterface.class);
-		
-		if(list.isEmpty())
-		{
-			throw new ResourcesNotFoundException();
-		}
-		
-		return list;
+//	public ArrayList<UserProfileJobsResponse> getCandidates(long id)
+//	{
+//		List<UsersJobsInterface>list=this.repository.getApplyCandidates(id, UsersJobsInterface.class);
+//		
+//		UserProfileJobsResponse response=new UserProfileJobsResponse();
+//		
+//
+//		
+//		long userId = 0;
+//		String name = null;
+//		String email= null;
+//		String city= null;
+//		String state= null;
+//		String expireance= null;
+//		String role= null;
+//		String job= null;
+//		
+//		ArrayList<UserProfileJobsResponse>al=new ArrayList<>();
+//		
+//		for(int i=0;i<list.size();i++)
+//		{
+//		
+////		for(UsersJobsInterface jobsInterface:list)
+////		{
+////			userId=jobsInterface.getId();
+////			name=jobsInterface.getName();
+////			email=jobsInterface.getEmail();
+////			city=jobsInterface.getCity();
+////			state=jobsInterface.getState();
+////			role=jobsInterface.getRole();
+////			job=jobsInterface.getJobs();
+////			
+////			
+////			
+////		}
+//			
+//			UsersJobsInterface jobsInterface=list.get(i);
+//			userId=jobsInterface.getId();
+//			name=jobsInterface.getName();
+//			email=jobsInterface.getEmail();
+//			city=jobsInterface.getCity();
+//			state=jobsInterface.getState();
+//			role=jobsInterface.getRole();
+//			job=jobsInterface.getJobs();
+//			
+//			
+//			String url="http://Profile-Service/api/user/profile/"+userId;
+//			
+//			List<UserProfileInterface>  s=this.restTemplate.getForObject(url, List.class);
+//			
+//			
+//			
+//			
+//			
+//			
+//			response.setExpireance(s);
+//			
+//		response.setName(name);
+//		response.setEmail(email);
+//		response.setCity(city);
+//		response.setState(state);
+//		response.setJobs(job);
+//		response.setRole(role);
+//		
+//		al.add(response);
+//		
+//		userId++;
+//		
+//		
+//		}
+//		
+//	
+//		
+//		
+//		
+//		
+////		List<Object> list3=new ArrayList<>();
+////		
+////		list3.add(response);
+////		
+////		list3.add(list2);
+////		list3.add(list);
+//		
+////		
+////		if(list3.isEmpty())
+////		{
+////			throw new ResourcesNotFoundException();
+////		}
+//		
+//		return   al;
+//	
+//	}
 	
+	
+	public ArrayList<UserProfileJobsResponse> getCandidates(long id) {
+	    List<UsersJobsInterface> list = this.repository.getApplyCandidates(id, UsersJobsInterface.class);
+	    ArrayList<UserProfileJobsResponse> al = new ArrayList<>();
+	    
+	    for (int i = 0; i < list.size(); i++) {
+	        UserProfileJobsResponse response = new UserProfileJobsResponse();
+	        UsersJobsInterface jobsInterface = list.get(i);
+	        long userId = jobsInterface.getId();
+	        String name = jobsInterface.getName();
+	        String email = jobsInterface.getEmail();
+	        String city = jobsInterface.getCity();
+	        String state = jobsInterface.getState();
+	        String role = jobsInterface.getRole();
+	        String job = jobsInterface.getJobs();
+	        
+	        String url = "http://Profile-Service/api/user/profile/" + userId;
+	        List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
+	        String expireance = null;
+//	        
+//	        for (UserProfileInterface profile : s) {
+//	            expireance = profile.getExpireance();
+//	        }
+	        
+	        
+	        response.setName(name);
+	        response.setEmail(email);
+	        response.setCity(city);
+	        response.setState(state);
+	        response.setJobs(job);
+	        response.setRole(role);
+	        response.setExpireance(s);
+	        al.add(response);
+	    }
+	    
+	    if (al.isEmpty()) {
+	        throw new ResourcesNotFoundException();
+	    }
+	    
+	    return al;
 	}
+
 	
 }

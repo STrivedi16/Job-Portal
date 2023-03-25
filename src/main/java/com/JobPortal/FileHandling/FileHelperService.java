@@ -12,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.JobPortal.Interface.JobsUsersInterface;
 import com.JobPortal.Interface.UsersJobsInterface;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.entity.UserEntity;
@@ -63,7 +64,7 @@ public class FileHelperService {
 	
 	public void getUserJob(HttpServletResponse response) throws IOException
 	{
-		List<UsersJobsInterface>list=this.repository.findAll(UsersJobsInterface.class);
+		List<JobsUsersInterface>list=this.repository.findall(JobsUsersInterface.class);
 		
 		
 		
@@ -80,7 +81,7 @@ public class FileHelperService {
 		
 		int dataRow=0;
 		int records=1;
-		for(UsersJobsInterface user: list)
+		for(JobsUsersInterface user: list)
 		{
 			XSSFRow data=sheet.createRow(dataRow);
 			data.createCell(0).setCellValue(records);

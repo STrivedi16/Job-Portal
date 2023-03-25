@@ -1,5 +1,6 @@
 package com.JobPortal.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import com.JobPortal.Responce.SuccessMessageConstant;
 import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Service.UserJobService;
 import com.JobPortal.entity.UserJobsEntity;
+import com.JobPortal.entity.UserProfileJobsResponse;
 
 @RestController
 public class UserJobController {
@@ -41,6 +43,8 @@ public class UserJobController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	
 	
 	@PostMapping("/applyforjob")
 	@PreAuthorize("hasAuthority	('applyforJobs')")
@@ -164,11 +168,18 @@ public class UserJobController {
 	@PreAuthorize("hasAuthority	('showUserJobs')")
 	public ResponseEntity<?> getApplyCandidates(@PathVariable("id") long id )
 	{
+		
 		try {
-			List<UsersJobsInterface>  list=this.jobService.getCandidates(id);
+			
+			if(filter.id==id)
+			{
+			
+			ArrayList<UserProfileJobsResponse>  list=this.jobService.getCandidates(id);
 			
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOBS, SuccessMessageKey.USER_JOB_M031702, list),HttpStatus.OK);
-		
+			}
+			
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, ErrorMessageKey.ACCESS_DENIED),HttpStatus.NOT_ACCEPTABLE);
 		}
 		
 		catch (ResourcesNotFoundException e) {

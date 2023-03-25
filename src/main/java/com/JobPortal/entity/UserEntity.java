@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
@@ -52,6 +53,10 @@ public class UserEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "users")
 	private List<UserRolesEntity> roles;
+	
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "userEntity")
+	private UserProfile userProfile;
+	
 	
 	public long getId() {
 		return id;
@@ -168,6 +173,16 @@ public class UserEntity {
 		this.updationTime = updationTime;
 		this.jobsEntities = jobsEntities;
 		this.roles = roles;
+	}
+	
+	
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
 	}
 
 	public UserEntity() {

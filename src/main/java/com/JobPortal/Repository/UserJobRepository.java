@@ -36,7 +36,7 @@ public interface UserJobRepository extends JpaRepository<UserJobsEntity, Long>{
 			+ "join jobs_entity j on j.id = uje.job_entity_id where j.company= :name", nativeQuery = true)
 	Page<UserInterface> getAllCandidats(String name, Class<UserInterface> class1, Pageable pageable);
 	
-	@Query(value = "select u.name , u.email,u.city,u.state, j.role , j.jobs from user_entity u\r\n"
+	@Query(value = "select u.name ,u.id, u.email,u.city,u.state, j.role , j.jobs from user_entity u\r\n"
 			+ "join user_jobs_entity uje on u.id= uje.user_entity_id\r\n"
 			+ "join jobs_entity j on j.id= uje.job_entity_id where j.created_by= :username ",nativeQuery = true)
 	List<UsersJobsInterface> getApplyCandidates(@Param("username") long username, Class<UsersJobsInterface>Class);

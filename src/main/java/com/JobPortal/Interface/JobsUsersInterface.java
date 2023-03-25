@@ -1,10 +1,9 @@
 package com.JobPortal.Interface;
 
-public interface UsersJobsInterface {
+public interface JobsUsersInterface {
 
 	
-	public long getId();
-	public String getName() ;
+public String getName() ;
 	
 	public String getEmail();
 	
@@ -19,6 +18,7 @@ public interface UsersJobsInterface {
 	
 	public String getJobs();
 	
+	public String getCompany();
 	
 	
 }

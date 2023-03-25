@@ -1,18 +1,23 @@
 package com.JobPortal.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy.Content;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.JobPortal.Dto.UserDto;
 import com.JobPortal.Interface.UserInterface;
 import com.JobPortal.Interface.UserPermission;
+import com.JobPortal.Interface.UserProfileInterface;
+import com.JobPortal.Interface.UserProfileMerge;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.Responce.ResourcesNotFoundException;
 import com.JobPortal.entity.UserEntity;
@@ -22,6 +27,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	public UserDto registerUser(UserDto dto) throws Exception
 	{
@@ -47,7 +55,15 @@ public class UserService {
 	public List<UserInterface> getUserDetails(long id )
 	{
 		
+//		Collection<? extends UserInterface> li=new ArrayList<>();
+//		li.add()
+		
+//		String url="http://Profile-Service/user/profile/"+id;
+//		List=this.restTemplate.getForObject(url, UserProfileInterface.class);
+		
 		List<UserInterface>  list=this.repository.findById(id, UserInterface.class);
+		//list.addAll(li);
+		
 		if(list.isEmpty())
 		{
 			throw new ResourcesNotFoundException();
@@ -56,6 +72,38 @@ public class UserService {
 		return list;
 		
 	}
+	
+	public List<Object> getUserDetailsProfile(long id )
+	{
+		
+//		Collection<? extends UserInterface> li=new ArrayList<>();
+//		li.add()
+		
+//		String url="http://Profile-Service/user/profile/"+id;
+//		List=this.restTemplate.getForObject(url, UserProfileInterface.class);
+		
+		String url="http://Profile-Service/api/user/profile/"+id;
+		List<UserProfileInterface>  s=this.restTemplate.getForObject(url, List.class);
+		
+		
+		
+		List<UserInterface>  list=this.repository.findById(id, UserInterface.class);
+		
+		List<Object> list2=new ArrayList<>();
+		
+		list2.addAll(list);
+		list2.add(s);
+		
+		
+//		if(list.isEmpty())
+//		{
+//			throw new ResourcesNotFoundException();
+//		}
+		
+		return list2;
+		
+	}
+	
 	
 public List<UserInterface> getAll(Integer pagesize, Integer pagenumber) {
 		

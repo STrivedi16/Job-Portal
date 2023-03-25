@@ -18,6 +18,7 @@ import com.JobPortal.Config.JwtFilter;
 import com.JobPortal.Config.PasswordVerification;
 import com.JobPortal.Dto.UserDto;
 import com.JobPortal.Interface.UserInterface;
+import com.JobPortal.Interface.UserProfileMerge;
 import com.JobPortal.Responce.ErrorMessage;
 import com.JobPortal.Responce.ErrorMessageConstant;
 import com.JobPortal.Responce.ErrorMessageKey;
@@ -79,7 +80,10 @@ public class UserController {
 			if(filter.id==id)
 			{
 			
-			List<UserInterface> list=this.service.getUserDetails(id);
+			//List<UserInterface> list=this.service.getUserDetails(id);
+			List<Object> list=this.service.getUserDetailsProfile(id);
+			
+			
 			
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_DETAILS, SuccessMessageKey.USER_M031102, list),HttpStatus.OK);
 		}
