@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2021.0.6</spring-cloud.version>
+		
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,6 +42,34 @@
         </dependency>
 
 
+
+		<!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-active-directory-spring-boot-starter 
+<dependency>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-active-directory-spring-boot-starter</artifactId>
+    <version>3.0.0</version>
+</dependency>
+-->
+  <!-- https://mvnrepository.com/artifact/com.azure.spring/azure-spring-boot-starter-active-directory 
+<dependency>
+    <groupId>com.azure.spring</groupId>
+    <artifactId>azure-spring-boot-starter-active-directory</artifactId>
+    <version>4.0.0</version>
+</dependency>
+-->
+<!-- 
+<dependency>
+    <groupId>org.springframework.security.extensions</groupId>
+    <artifactId>spring-security-saml2-core</artifactId>
+    <version>1.0.10.RELEASE</version>
+</dependency>
+-->
+<!-- <dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-saml-dsl</artifactId>
+    <version>2.0.4.RELEASE</version>
+</dependency>
+-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -87,6 +116,8 @@
     <version>1.6.2</version>
 </dependency>
 
+
+
  <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -121,9 +152,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				 
 			</plugin>
 		</plugins>
+		<finalName>myJar</finalName>
 	</build>
+	
+	
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

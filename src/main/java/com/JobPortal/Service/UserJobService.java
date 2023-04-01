@@ -213,15 +213,12 @@ public class UserJobService {
 	        String role = jobsInterface.getRole();
 	        String job = jobsInterface.getJobs();
 	        
+	        try {
+	        
 	        String url = "http://Profile-Service/api/user/profile/" + userId;
 	        List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
 	        String expireance = null;
 //	        
-//	        for (UserProfileInterface profile : s) {
-//	            expireance = profile.getExpireance();
-//	        }
-	        
-	        
 	        response.setName(name);
 	        response.setEmail(email);
 	        response.setCity(city);
@@ -230,7 +227,28 @@ public class UserJobService {
 	        response.setRole(role);
 	        response.setExpireance(s);
 	        al.add(response);
-	    }
+	        
+       }
+	        catch (Exception e) {
+	        	
+//	        	e.printStackTrace();
+	        	response.setName(name);
+		        response.setEmail(email);
+		        response.setCity(city);
+		        response.setState(state);
+		        response.setJobs(job);
+		        response.setRole(role);
+		        response.setExpireance(null);
+		        al.add(response);
+			}
+	        
+//	        for (UserProfileInterface profile : s) {
+//	            expireance = profile.getExpireance();
+//	        }
+	        
+	        
+	        
+	   }
 	    
 	    if (al.isEmpty()) {
 	        throw new ResourcesNotFoundException();

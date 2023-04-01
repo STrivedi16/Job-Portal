@@ -81,7 +81,7 @@ public class UserController {
 			{
 			
 			//List<UserInterface> list=this.service.getUserDetails(id);
-			List<Object> list=this.service.getUserDetailsProfile(id);
+			List<UserInterface> list=this.service.getUserDetailsProfile(id);
 			
 			
 			

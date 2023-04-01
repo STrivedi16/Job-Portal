@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @SQLDelete(sql = "update jobs_entity set is_active=false where id=?")
 @Where(clause = "is_active=true")
+@Table(name = "JobsEntity" ,schema = "testing")
 public class JobsEntity {
 
 	@Id

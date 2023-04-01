@@ -73,7 +73,7 @@ public class UserService {
 		
 	}
 	
-	public List<Object> getUserDetailsProfile(long id )
+	public List<UserInterface> getUserDetailsProfile(long id )
 	{
 		
 //		Collection<? extends UserInterface> li=new ArrayList<>();
@@ -82,17 +82,17 @@ public class UserService {
 //		String url="http://Profile-Service/user/profile/"+id;
 //		List=this.restTemplate.getForObject(url, UserProfileInterface.class);
 		
-		String url="http://Profile-Service/api/user/profile/"+id;
-		List<UserProfileInterface>  s=this.restTemplate.getForObject(url, List.class);
+//		String url="http://Profile-Service/api/user/profile/"+id;
+//		List<UserProfileInterface>  s=this.restTemplate.getForObject(url, List.class);
 		
 		
 		
 		List<UserInterface>  list=this.repository.findById(id, UserInterface.class);
 		
-		List<Object> list2=new ArrayList<>();
-		
-		list2.addAll(list);
-		list2.add(s);
+//		List<Object> list2=new ArrayList<>();
+//		
+//		list2.addAll(list);
+//		list2.add(s);
 		
 		
 //		if(list.isEmpty())
@@ -100,7 +100,7 @@ public class UserService {
 //			throw new ResourcesNotFoundException();
 //		}
 		
-		return list2;
+		return list;
 		
 	}
 	
