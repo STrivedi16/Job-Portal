@@ -19,7 +19,7 @@ public class RecruterEntity {
 	
 	private String 	name;
 	
-	private String company;
+	private String companyEmail;
 	
 	private String companyDiscription;
 	
@@ -27,7 +27,7 @@ public class RecruterEntity {
 	
 	private String password;
 	
-	private int opening ;
+	private CompanyStatus status;
 	
 	@CreationTimestamp
 	private Timestamp creationTime;
@@ -53,12 +53,14 @@ public class RecruterEntity {
 		this.name = name;
 	}
 
-	public String getCompany() {
-		return company;
+	
+
+	public String getCompanyEmail() {
+		return companyEmail;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 
 	public String getCompanyDiscription() {
@@ -111,19 +113,32 @@ public class RecruterEntity {
 
 	
 	
-	public RecruterEntity(long id, String name, String company, String companyDiscription, String registrationNumber,
-			String password, int opening, Timestamp creationTime, Timestamp updationTime, boolean is_active) {
+	
+
+	
+
+	public RecruterEntity(long id, String name, String companyEmail, String companyDiscription,
+			String registrationNumber, String password, CompanyStatus status, Timestamp creationTime,
+			Timestamp updationTime, boolean is_active) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.company = company;
+		this.companyEmail = companyEmail;
 		this.companyDiscription = companyDiscription;
 		this.registrationNumber = registrationNumber;
 		this.password = password;
-		this.opening = opening;
+		this.status = status;
 		this.creationTime = creationTime;
 		this.updationTime = updationTime;
 		this.is_active = is_active;
+	}
+
+	public CompanyStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CompanyStatus status) {
+		this.status = status;
 	}
 
 	public RecruterEntity() {
@@ -131,14 +146,6 @@ public class RecruterEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getOpening() {
-		return opening;
-	}
-
-	public void setOpening(int opening) {
-		this.opening = opening;
-	}
-	
 	
 	
 	
