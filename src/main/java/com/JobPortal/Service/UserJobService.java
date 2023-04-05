@@ -206,6 +206,7 @@ public class UserJobService {
 	        UserProfileJobsResponse response = new UserProfileJobsResponse();
 	        UsersJobsInterface jobsInterface = list.get(i);
 	        long userId = jobsInterface.getId();
+	        System.err.println(userId);
 	        String name = jobsInterface.getName();
 	        String email = jobsInterface.getEmail();
 	        String city = jobsInterface.getCity();
@@ -217,6 +218,7 @@ public class UserJobService {
 	        
 	        String url = "http://Profile-Service/api/user/profile/" + userId;
 	        List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
+	        
 	        String expireance = null;
 //	        
 	        response.setName(name);

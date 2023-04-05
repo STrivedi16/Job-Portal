@@ -4,11 +4,19 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.type.descriptor.java.MutabilityPlan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.JobPortal.FileHandling.FileHelperService;
+import com.JobPortal.Responce.ErrorMessage;
+import com.JobPortal.Responce.SuccessMsg;
 
 @RestController
 public class FileController {
@@ -16,6 +24,56 @@ public class FileController {
 	@Autowired
 	private FileHelperService fileHelperService;
 
+	@Autowired
+	private FileHelperService service;
+	
+	
+	@PostMapping("/skillsFile")
+	public ResponseEntity<?> setSkills(@RequestParam("file") MultipartFile file)
+	{
+		try {
+			
+				if(file.isEmpty())
+				{
+					return new ResponseEntity<>(new ErrorMessage("file not get", "File format is not proper"),HttpStatus.NOT_ACCEPTABLE);
+
+				}
+				
+				this.service.save(file);
+				
+				return new ResponseEntity<>(new SuccessMsg("Success", "Success"),HttpStatus.OK);
+			
+			
+				}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage("file is not proper ", "JP-E032002"),HttpStatus.BAD_REQUEST);
+
+		}
+	}
+	
+	@PostMapping("/userfile")
+	public ResponseEntity<?> setUserdata(@RequestParam("file") MultipartFile file)
+	{
+		try {
+			if(file.isEmpty())
+			{
+				return new ResponseEntity<>(new ErrorMessage("file not get", "File format is not proper"),HttpStatus.NOT_ACCEPTABLE);
+
+			}
+			this.service.saveUser(file);
+			
+			return new ResponseEntity<>(new SuccessMsg("Success", "Success"),HttpStatus.OK);
+		
+		
+
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage("file is not proper ", "JP-E032002"),HttpStatus.BAD_REQUEST);
+
+		}
+	}
+	
+	
 	@GetMapping("/userFile")
 	public void generateExcel(HttpServletResponse response) throws IOException
 	{

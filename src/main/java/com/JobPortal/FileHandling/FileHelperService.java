@@ -5,17 +5,23 @@ import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.multi.MultiButtonUI;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.xml.DomUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.JobPortal.Interface.JobsUsersInterface;
 import com.JobPortal.Interface.UsersJobsInterface;
+import com.JobPortal.Repository.SkillsRepository;
 import com.JobPortal.Repository.UserRepository;
+import com.JobPortal.entity.Skills;
 import com.JobPortal.entity.UserEntity;
+import com.netflix.discovery.converters.Auto;
 
 @Service
 public class FileHelperService {
@@ -23,6 +29,50 @@ public class FileHelperService {
 	@Autowired
 	
 	private UserRepository repository;
+	
+	@Autowired
+	private SkillsRepository skillsRepository;
+	
+	@Autowired
+	private FileService fileService;
+	
+	public void save(MultipartFile  file)
+	{
+		try {
+			
+			if(fileService.checkFileFormat(file))
+			{
+				List<Skills> list=fileService.storeToDb(file);
+				
+				this.skillsRepository.saveAll(list);
+			}
+			else {
+				throw new Exception("file not matched");
+			}
+			
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveUser(MultipartFile file)
+	{
+		try {
+			if(fileService.checkFileFormat(file))
+			{
+				List<UserEntity> list=fileService.setData(file);
+			}
+			else {
+				throw new Exception("file not matched");
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void getAllUser(HttpServletResponse response) throws IOException
 	{
