@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			,"/v2/api-docs"
 			,"/swagger-resources/**",
 			"/swagger-ui/**",
-			"/webjars/**","/forgot","/loginWithOtp"};	
+			"/webjars/**","/forgot","/loginWithOtp","/SamlResponse"};	
 	
 	
 	@Autowired
