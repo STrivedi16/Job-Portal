@@ -20,6 +20,7 @@ import com.JobPortal.Repository.JobRepository;
 import com.JobPortal.Repository.UserJobRepository;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.Responce.ResourcesNotFoundException;
+import com.JobPortal.ServiceImpl.UserJobServiceImpl;
 import com.JobPortal.entity.JobsEntity;
 import com.JobPortal.entity.UserEntity;
 import com.JobPortal.entity.UserJobsEntity;
@@ -29,7 +30,7 @@ import com.netflix.discovery.converters.Auto;
 import io.swagger.v3.oas.models.examples.Example;
 
 @Service
-public class UserJobService {
+public class UserJobService implements UserJobServiceImpl{
 
 	@Autowired
 	private UserRepository  userRepository;

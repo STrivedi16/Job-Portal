@@ -42,6 +42,15 @@ public static final String REQUEST_ERROR = "http request not proper";
 	public static final String USER_JOB_STATUS="status not updated";
 	
 	
+	// FILE 
+	public static final String FILE_NOT_STORED="file not stored";
+	public static final String FILE_NOT_PROPER="file formate is not matched";
+	
+	
+	// RECRUTER
+	public static final String RECRUTER_NOT_STORED="recruter not stored";
+	public static final String RECRUTER_STATUS_NOT_UPDATE="recruter status not update";
+	
 	
 
 }

@@ -2,38 +2,45 @@ package com.JobPortal.Dto;
 
 public class RecruterDto {
 
-	String name;
+	private String companyName;
 	
-	String companyEmail;
+	private String email;
 	
-	String companyDiscription;
+	private String discription;
 	
-	String registrationNumber;
+	private String registrationNumber;
 	
-	String password;
+	private String password;
+	
+	
+	private String city;
+	private String state;
+	
+	private String mobileNo;
 
-	public String getName() {
-		return name;
+	
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
-	public String getCompanyEmail() {
-		return companyEmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCompanyEmail(String companyEmail) {
-		this.companyEmail = companyEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getCompanyDiscription() {
-		return companyDiscription;
+	public String getDiscription() {
+		return discription;
 	}
 
-	public void setCompanyDiscription(String companyDiscription) {
-		this.companyDiscription = companyDiscription;
+	public void setDiscription(String discription) {
+		this.discription = discription;
 	}
 
 	public String getRegistrationNumber() {
@@ -52,20 +59,48 @@ public class RecruterDto {
 		this.password = password;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public RecruterDto(String companyName, String email, String discription, String registrationNumber, String password,
+			String city, String state, String mobileNo) {
+		super();
+		this.companyName = companyName;
+		this.email = email;
+		this.discription = discription;
+		this.registrationNumber = registrationNumber;
+		this.password = password;
+		this.city = city;
+		this.state = state;
+		this.mobileNo = mobileNo;
+	}
+
 	public RecruterDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public RecruterDto(String name, String companyEmail, String companyDiscription, String registrationNumber,
-			String password) {
-		super();
-		this.name = name;
-		this.companyEmail = companyEmail;
-		this.companyDiscription = companyDiscription;
-		this.registrationNumber = registrationNumber;
-		this.password = password;
-	}
+	
 	
 	
 	

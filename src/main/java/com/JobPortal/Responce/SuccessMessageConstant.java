@@ -38,5 +38,15 @@ public class SuccessMessageConstant {
 	public static final String JOB_SHOW="jobs details fetched successfull";	
 	public static final String USER_JOB_STATUS="user application status has been update successfull";
 	
-
+	
+	// file
+	public static final String FILE_UPLOAD="file upload successfull";
+	
+	
+	
+	// RECRUTER
+	
+	public static final String RECRUTER_ADD="recruter added successfull";
+	public static final String RECRUTER_STATUS="status has updated successfull";
+	
 }

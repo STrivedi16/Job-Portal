@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.JobPortal.Dto.RoleDto;
 import com.JobPortal.Repository.RoleRepository;
+import com.JobPortal.ServiceImpl.RoleServiceImpl;
 import com.JobPortal.entity.Roles;
 
 @Service
-public class RoleService {
+public class RoleService implements RoleServiceImpl {
 
 	@Autowired
 	private RoleRepository repository;

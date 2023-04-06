@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.JobPortal.FileHandling.FileHelperService;
 import com.JobPortal.Responce.ErrorMessage;
+import com.JobPortal.Responce.ErrorMessageConstant;
+import com.JobPortal.Responce.ErrorMessageKey;
+import com.JobPortal.Responce.SuccessMessageConstant;
+import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Responce.SuccessMsg;
 
 @RestController
@@ -35,18 +39,18 @@ public class FileController {
 			
 				if(file.isEmpty())
 				{
-					return new ResponseEntity<>(new ErrorMessage("file not get", "File format is not proper"),HttpStatus.NOT_ACCEPTABLE);
+					return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_PROPER, ErrorMessageKey.FILE_E031802),HttpStatus.NOT_ACCEPTABLE);
 
 				}
 				
 				this.service.save(file);
 				
-				return new ResponseEntity<>(new SuccessMsg("Success", "Success"),HttpStatus.OK);
+				return new ResponseEntity<>(new SuccessMsg(SuccessMessageConstant.FILE_UPLOAD, SuccessMessageKey.FILE_M031901),HttpStatus.OK);
 			
 			
 				}
 		catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("file is not proper ", "JP-E032002"),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_STORED, ErrorMessageKey.FILE_E031801),HttpStatus.BAD_REQUEST);
 
 		}
 	}
@@ -57,18 +61,17 @@ public class FileController {
 		try {
 			if(file.isEmpty())
 			{
-				return new ResponseEntity<>(new ErrorMessage("file not get", "File format is not proper"),HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_PROPER, ErrorMessageKey.FILE_E031802),HttpStatus.NOT_ACCEPTABLE);
 
 			}
 			this.service.saveUser(file);
 			
-			return new ResponseEntity<>(new SuccessMsg("Success", "Success"),HttpStatus.OK);
-		
-		
+			return new ResponseEntity<>(new SuccessMsg(SuccessMessageConstant.FILE_UPLOAD, SuccessMessageKey.FILE_M031901),HttpStatus.OK);
+			
 
 		}
 		catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("file is not proper ", "JP-E032002"),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_STORED, ErrorMessageKey.FILE_E031801),HttpStatus.BAD_REQUEST);
 
 		}
 	}

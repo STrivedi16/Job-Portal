@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.JobPortal.Dto.PermissionDto;
 import com.JobPortal.Repository.PermissionsRepository;
+import com.JobPortal.ServiceImpl.PermissionServiceImpl;
 import com.JobPortal.entity.Permissions;
 
 @Service
-public class PermissionService {
+public class PermissionService implements PermissionServiceImpl{
 
 	@Autowired
 	private PermissionsRepository permissionsRepository;

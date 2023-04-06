@@ -12,6 +12,9 @@ public class ErrorMessageKey {
 	private static final String ROLE_PERMISSION="15";
 	private static final String JOB="16";
 	private static final String USER_JOB="17";
+	private static final String FILE="18";	
+	private static final String RECRUITER="19";
+	
 	
 	public static final String REQUEST_E0300=HEADER+"00";// requset incorrect
 
@@ -43,4 +46,16 @@ public class ErrorMessageKey {
 	public static final String USER_JOB_E031701=HEADER+USER_JOB+"01"; // user job not  added
 	public static final String USER_JOB_E031702=HEADER+USER_JOB+"02";	/// user job  not remove;
 	public static final String USER_JOB_E031704=HEADER+USER_JOB+"04";//user job status 
+	
+	
+	//file 
+	public static final String FILE_E031801=HEADER+FILE+"01";//file not stored
+	public static final String FILE_E031802=HEADER+FILE+"02";//file formate is not matched
+	
+	//recruiter
+	
+	//recruter
+	public static final String RECRUITER_E031901=HEADER+RECRUITER+"01";// recruter is not stored
+	public static final String RECRUITER_E031902=HEADER+RECRUITER+"02";// recruter status is not updated
+	
 }

@@ -12,6 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.JobPortal.Responce.ResourcesNotFoundException;
@@ -54,13 +55,15 @@ public class EmailService {
 		
 		//step 2: compose the message
 		MimeMessage message2=new MimeMessage(session);
+		MimeMessageHelper helper=new MimeMessageHelper(message2);
+		
 		
 		try {
 			message2.setFrom(from);
 			message2.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message2.setSubject(subject);
 			message2.setContent(message,"text/html");
-			
+		
 			
 			// step 3: send message using transport class
 			Transport.send(message2);

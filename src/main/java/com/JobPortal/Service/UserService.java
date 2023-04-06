@@ -20,16 +20,18 @@ import com.JobPortal.Interface.UserProfileInterface;
 import com.JobPortal.Interface.UserProfileMerge;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.Responce.ResourcesNotFoundException;
+import com.JobPortal.ServiceImpl.UserServiceImpl;
 import com.JobPortal.entity.UserEntity;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceImpl {
 
 	@Autowired
 	private UserRepository repository;
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
 	
 	public UserDto registerUser(UserDto dto) throws Exception
 	{
@@ -52,6 +54,7 @@ public class UserService {
 		return dto;
 	}
 	
+
 	public List<UserInterface> getUserDetails(long id )
 	{
 		
@@ -72,6 +75,7 @@ public class UserService {
 		return list;
 		
 	}
+	
 	
 	public List<UserInterface> getUserDetailsProfile(long id )
 	{
@@ -139,7 +143,7 @@ public List<UserInterface> getAll(Integer pagesize, Integer pagenumber) {
 		return arrayList;
 	}
 	
-	
+
 	public String  forgotPassword(String email, UserDto dto) 
 	{
 		UserEntity entity=this.repository.findByEmailIgnoreCase(email);

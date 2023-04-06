@@ -12,6 +12,8 @@ public class SuccessMessageKey {
 	private static final String JOB="16";
 	private static final String USER_JOB="17";
 	private static final String OTP="18";
+	private static final String FILE="19";
+	private static final String RECUTER="20";
 	
 	public static final String OTP_M031800=HEADER+OTP+"00";
 	
@@ -42,4 +44,15 @@ public class SuccessMessageKey {
 	public static final String USER_JOB_M031702=HEADER+USER_JOB+"02";	/// user job fetched;
 	public static final String USER_JOB_M031703=HEADER+USER_JOB+"03";	// user jobs remove
 	public static final String USER_JOB_M031704=HEADER+USER_JOB+"04";	//user job status update 
+
+	//file 
+	public static final String FILE_M031901=HEADER+FILE+"01";// file upload successfull
+	
+	
+	//recruer
+	
+	public static final String RECRUTER_M032001=HEADER+RECUTER+"01";//recruter add successfull
+	public static final String RECRUTER_M032002=HEADER+RECUTER+"02";// recruter status updated successfull
+	
+
 }
