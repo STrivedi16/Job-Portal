@@ -17,4 +17,6 @@ public interface RecruterServiceImpl {
 	 
 
 	RecruterEntity updateStatus(long id, RecruterStatusDto dto) throws Exception;
+	
+	RecruterDto getDetails();
 }

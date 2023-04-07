@@ -97,9 +97,31 @@ public class UserJobService implements UserJobServiceImpl{
 	{
 		UserJobsEntity entity=this.repository.findById(id).orElseThrow(()-> new Exception("User job not found"));
 		
+		JobsEntity  jobs=this.jobRepository.findById(entity.getJobEntity().getId()).orElseThrow(()-> new Exception("Jobs not found"));
+		
+		
 		System.out.println(entity);
+		
 	
 		entity.setStatus(dto.getStatus());
+		
+		System.err.println(dto.getStatus());
+		
+		
+		if(entity.getStatus().equals(Status.SELECTED))
+		{
+			System.err.println("In if condition +123131313131313131313131312312312313");
+			int currentOpenig=jobs.getOpening();
+			System.err.println("currentOpenig from DB  "+currentOpenig);
+			
+			int remain=currentOpenig-1;
+			
+			System.out.println("Remain = "+ remain);
+			
+			jobs.setOpening(remain);
+			
+			this.jobRepository.save(jobs);
+		}
 		
 		return this.repository.save(entity);
 		

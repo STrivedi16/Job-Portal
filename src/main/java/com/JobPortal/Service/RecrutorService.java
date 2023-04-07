@@ -30,7 +30,7 @@ public class RecrutorService implements RecruterServiceImpl {
 		UserEntity entity2=new UserEntity();
 		
 		entity.setName(dto.getCompanyName());
-		entity.setCompanyEmail(dto.getCompanyName());
+		entity.setCompanyEmail(dto.getEmail());
 		entity.setCompanyDiscription(dto.getDiscription());
 		entity.setPassword(dto.getPassword());
 		entity.setRegistrationNumber(dto.getRegistrationNumber());
@@ -50,6 +50,9 @@ public class RecrutorService implements RecruterServiceImpl {
 		
 		return dto;
 	}
+	
+	
+	
 
 	@Override
 	public RecruterEntity updateStatus(long id, RecruterStatusDto dto)  {
@@ -61,6 +64,15 @@ public class RecrutorService implements RecruterServiceImpl {
 		return  this.recruterRepo.save(entity);
 		
 		
+	}
+
+
+
+
+	@Override
+	public RecruterDto getDetails() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -18,6 +18,7 @@ public class JobDto {
 	
 	private long validDateTimeInDays;
 	
+	private int opening;
 
 	public String getJob() {
 		return job;
@@ -37,6 +38,14 @@ public class JobDto {
 	
 
 
+
+	public int getOpening() {
+		return opening;
+	}
+
+	public void setOpening(int opening) {
+		this.opening = opening;
+	}
 
 	public JobDto(String job, String role, String discription, String salary, String company, String requirement,
 			String helplineDetails, long validDateTimeInDays) {
@@ -117,6 +126,21 @@ public class JobDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public JobDto(String job, String role, String discription, String salary, String company, String requirement,
+			String helplineDetails, long validDateTimeInDays, int opening) {
+		super();
+		this.job = job;
+		this.role = role;
+		this.discription = discription;
+		this.salary = salary;
+		this.company = company;
+		this.requirement = requirement;
+		this.helplineDetails = helplineDetails;
+		this.validDateTimeInDays = validDateTimeInDays;
+		this.opening = opening;
+	}
+	
 	
 	
 	

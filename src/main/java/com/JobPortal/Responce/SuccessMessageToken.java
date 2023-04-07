@@ -1,5 +1,10 @@
 package com.JobPortal.Responce;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 public class SuccessMessageToken {
 
 	private String successMessage;
@@ -9,6 +14,8 @@ public class SuccessMessageToken {
 	private String token;
 	
 	private String refToken;
+	
+	private ArrayList<SimpleGrantedAuthority> permission;
 
 	public String getSuccessMessage() {
 		return successMessage;
@@ -54,6 +61,28 @@ public class SuccessMessageToken {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public ArrayList<SimpleGrantedAuthority> getPermission() {
+		return permission;
+	}
+
+	public void setPermission(ArrayList<SimpleGrantedAuthority> permission) {
+		this.permission = permission;
+	}
+
+	public SuccessMessageToken(String successMessage, String successKey, String token, String refToken,
+			ArrayList<SimpleGrantedAuthority> permission) {
+		super();
+		this.successMessage = successMessage;
+		this.successKey = successKey;
+		this.token = token;
+		this.refToken = refToken;
+		this.permission = permission;
+	}
+
+	
+	
+	
 	
 	
 }

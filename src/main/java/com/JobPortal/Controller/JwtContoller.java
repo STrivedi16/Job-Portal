@@ -1,10 +1,16 @@
 package com.JobPortal.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +30,8 @@ import com.JobPortal.Responce.SuccessMessageConstant;
 import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Responce.SuccessMessageToken;
 import com.JobPortal.Service.CustomerUserDetailsSerice;
+import com.JobPortal.interceptor.Interceptor;
+import com.netflix.discovery.converters.Auto;
 
 @RestController
 public class JwtContoller {
@@ -46,6 +54,17 @@ public class JwtContoller {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+
+
+
+//	public String getPermission(HttpServletRequest request)
+//	{
+//		String listPermission=(String) request.getAttribute("permissions");
+//	
+//		
+//	
+//		return listPermission;
+//	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest)
@@ -86,13 +105,15 @@ public class JwtContoller {
 	
 		
 		
+		
 		String token=this.jwtTokenUtils.generateToken(details);
 		
 		String reftoken=this.jwtRefreshToken.generateReftoken(details);
 		
 		return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.USER_LOGIN, SuccessMessageKey.USER_MO311OO, token, reftoken),HttpStatus.OK);
 		
-	}
+		
+		}
 	
 	
 }

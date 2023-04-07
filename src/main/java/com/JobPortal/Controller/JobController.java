@@ -48,13 +48,14 @@ public class JobController {
 	@GetMapping("/showJobs")
 	public ResponseEntity<?> showJobs(
 			@RequestParam(name = "pagenumber", defaultValue = "0",required = false)Integer pagenumber,
-			@RequestParam(name = "pagesize",defaultValue = "5",required = false)Integer pagesize
+			@RequestParam(name = "pagesize",defaultValue = "5",required = false)Integer pagesize,
+			@RequestParam(name ="role", required = false)String role
 			)
 	{
 		
 		try {
 			
-			List<JobInterface> list=this.jobService.searchJob(pagesize, pagenumber);
+			List<JobInterface> list=this.jobService.searchJob(pagesize, pagenumber, role);
 			
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.JOB_SHOW, SuccessMessageKey.JOB_M031602, list),HttpStatus.OK);
 		}

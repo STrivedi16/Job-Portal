@@ -44,6 +44,8 @@ public class JobsEntity {
 	
 	private String helplineDetails;
 	
+	private int opening ;
+	
 	@CreationTimestamp
 	private Timestamp creationTime;
 	
@@ -225,8 +227,37 @@ public class JobsEntity {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public int getOpening() {
+		return opening;
+	}
+
+	public void setOpening(int opening) {
+		this.opening = opening;
+	}
+
+	public JobsEntity(long id, String jobs, String role, String discription, String salary, String company,
+			String requirement, Timestamp dueDate, String helplineDetails, int opening, Timestamp creationTime,
+			Timestamp updationTime, boolean is_active, List<UserJobsEntity> userJobsEntities, long createdBy) {
+		super();
+		this.id = id;
+		this.jobs = jobs;
+		this.role = role;
+		this.discription = discription;
+		this.salary = salary;
+		this.company = company;
+		this.requirement = requirement;
+		this.dueDate = dueDate;
+		this.helplineDetails = helplineDetails;
+		this.opening = opening;
+		this.creationTime = creationTime;
+		this.updationTime = updationTime;
+		this.is_active = is_active;
+		this.userJobsEntities = userJobsEntities;
+		this.createdBy = createdBy;
+	}
 	
 	
-	
+	 
 	
 }

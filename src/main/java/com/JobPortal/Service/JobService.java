@@ -37,6 +37,7 @@ public class JobService {
 		entity.setSalary(dto.getSalary());
 		entity.setHelplineDetails(dto.getHelplineDetails());
 		entity.setCreatedBy(username);
+		entity.setOpening(dto.getOpening());
 		
 		long validateTime = 1440 * dto.getValidDateTimeInDays();
 		
@@ -48,18 +49,33 @@ public class JobService {
 		return dto;
 	}
 	
-	public List<JobInterface> searchJob(int pagesize, int pagenumber)
+	public List<JobInterface> searchJob(int pagesize, int pagenumber, String role)
 	{
-		org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
+		if(role==null){
+			
+			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
+			
+			Page<JobInterface> page=this.jobRepository.findAll(pageable,JobInterface.class);
+			
+			
+			
+			List<JobInterface> list=page.getContent();
+			
+			
+			return list;
+		}
+		else {
+			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
+			
+			Page<JobInterface> page=this.jobRepository.findByRoleIgnoreCase(role, pageable, JobInterface.class);
+			
+			List<JobInterface> list=page.getContent();
+			
+			return list;
+			
+		}
 		
-		Page<JobInterface> page=this.jobRepository.findAll(pageable,JobInterface.class);
 		
-		
-		
-		List<JobInterface> list=page.getContent();
-	
-		
-		return list;
 	}
 
 }
