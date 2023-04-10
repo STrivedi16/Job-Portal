@@ -49,25 +49,36 @@ public class JobService {
 		return dto;
 	}
 	
-	public List<JobInterface> searchJob(int pagesize, int pagenumber, String role)
+	public List<JobInterface> searchJob(int pagesize, int pagenumber, String role, String state)
 	{
-		if(role==null){
+		if(role==null && state!=null){
 			
 			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
 			
-			Page<JobInterface> page=this.jobRepository.findAll(pageable,JobInterface.class);
-			
-			
+			Page<JobInterface> page=this.jobRepository.findByStatesIgnoreCase(state, pageable, JobInterface.class);
 			
 			List<JobInterface> list=page.getContent();
 			
-			
 			return list;
+			
 		}
-		else {
+		else if(role!=null && state==null)
+		{
 			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
 			
 			Page<JobInterface> page=this.jobRepository.findByRoleIgnoreCase(role, pageable, JobInterface.class);
+			
+			List<JobInterface> list=page.getContent();
+			
+			return list;
+		}
+		
+		else {
+			
+		
+			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
+			
+			Page<JobInterface> page=this.jobRepository.findAll(pageable,JobInterface.class);
 			
 			List<JobInterface> list=page.getContent();
 			

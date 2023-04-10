@@ -46,6 +46,12 @@ public class JobsEntity {
 	
 	private int opening ;
 	
+	private String city;
+	
+	private String state;
+	
+	
+	
 	@CreationTimestamp
 	private Timestamp creationTime;
 	
@@ -235,10 +241,30 @@ public class JobsEntity {
 	public void setOpening(int opening) {
 		this.opening = opening;
 	}
+	
+	
+	
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 
 	public JobsEntity(long id, String jobs, String role, String discription, String salary, String company,
-			String requirement, Timestamp dueDate, String helplineDetails, int opening, Timestamp creationTime,
-			Timestamp updationTime, boolean is_active, List<UserJobsEntity> userJobsEntities, long createdBy) {
+			String requirement, Timestamp dueDate, String helplineDetails, int opening, String city, String state,
+			Timestamp creationTime, Timestamp updationTime, boolean is_active, List<UserJobsEntity> userJobsEntities,
+			long createdBy) {
 		super();
 		this.id = id;
 		this.jobs = jobs;
@@ -250,12 +276,17 @@ public class JobsEntity {
 		this.dueDate = dueDate;
 		this.helplineDetails = helplineDetails;
 		this.opening = opening;
+		this.city = city;
+		this.state = state;
 		this.creationTime = creationTime;
 		this.updationTime = updationTime;
 		this.is_active = is_active;
 		this.userJobsEntities = userJobsEntities;
 		this.createdBy = createdBy;
 	}
+
+	
+	
 	
 	
 	 
