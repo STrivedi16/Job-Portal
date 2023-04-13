@@ -7,12 +7,13 @@ import com.JobPortal.Dto.RolePermissionDto;
 import com.JobPortal.Repository.PermissionsRepository;
 import com.JobPortal.Repository.RolePermissionsRepository;
 import com.JobPortal.Repository.RoleRepository;
+import com.JobPortal.ServiceInterface.RolePermissionServiceIn;
 import com.JobPortal.entity.Permissions;
 import com.JobPortal.entity.Roles;
 import com.JobPortal.entity.RolesPermissionEntity;
 
 @Service
-public class RolePermissionService {
+public class RolePermissionService implements RolePermissionServiceIn{
 
 	@Autowired
 	private RoleRepository roleRepository;

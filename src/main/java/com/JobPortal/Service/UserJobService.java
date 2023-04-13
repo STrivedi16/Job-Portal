@@ -20,7 +20,7 @@ import com.JobPortal.Repository.JobRepository;
 import com.JobPortal.Repository.UserJobRepository;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.Responce.ResourcesNotFoundException;
-import com.JobPortal.ServiceImpl.UserJobServiceImpl;
+import com.JobPortal.ServiceInterface.UserJobServiceImpl;
 import com.JobPortal.entity.JobsEntity;
 import com.JobPortal.entity.UserEntity;
 import com.JobPortal.entity.UserJobsEntity;

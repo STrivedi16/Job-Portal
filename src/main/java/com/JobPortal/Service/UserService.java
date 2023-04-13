@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,8 +21,9 @@ import com.JobPortal.Interface.UserProfileInterface;
 import com.JobPortal.Interface.UserProfileMerge;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.Responce.ResourcesNotFoundException;
-import com.JobPortal.ServiceImpl.UserServiceImpl;
+import com.JobPortal.ServiceInterface.UserServiceImpl;
 import com.JobPortal.entity.UserEntity;
+import com.netflix.discovery.converters.Auto;
 
 @Service
 public class UserService implements UserServiceImpl {
@@ -31,6 +33,10 @@ public class UserService implements UserServiceImpl {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+
+	@Autowired
+	private BCryptPasswordEncoder  encoder;
+	
 	
 	
 	public UserDto registerUser(UserDto dto) throws Exception
@@ -46,7 +52,10 @@ public class UserService implements UserServiceImpl {
 		entity.setCity(dto.getCity());
 		entity.setState(dto.getState());
 		entity.setEmail(dto.getEmail());
-		entity.setPassword(dto.getPassword());
+	//Shivangi@123	
+		String password=encoder.encode(dto.getPassword());
+		dto.setPassword(password);
+		entity.setPassword(password);
 		entity.setMobileNo(dto.getMobileNo());
 		
 		this.repository.save(entity);
@@ -143,17 +152,25 @@ public List<UserInterface> getAll(Integer pagesize, Integer pagenumber) {
 		return arrayList;
 	}
 	
+	
+	// password shubham - 	Shubham$2711;
+	//id 9=mnTrivedi2711$
+	
 
 	public String  forgotPassword(String email, UserDto dto) 
 	{
 		UserEntity entity=this.repository.findByEmailIgnoreCase(email);
+		
 
 		if(entity==null)
 			{
 			throw new ResourcesNotFoundException();
 		}
 		
-		entity.setPassword(dto.getPassword());
+		String password=encoder.encode(dto.getPassword());
+		
+		
+		entity.setPassword(password);
 		
 		this.repository.save(entity);
 	

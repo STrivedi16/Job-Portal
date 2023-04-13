@@ -1,13 +1,17 @@
 package com.JobPortal.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,6 +32,9 @@ public class RecruterEntity {
 	private String registrationNumber;
 	
 	private String password;
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "recruter")
+	private List<RecruiterJobsEntity>  jobs;
 	
 	@Enumerated(EnumType.STRING)
 	private CompanyStatus status;
@@ -121,9 +128,10 @@ public class RecruterEntity {
 
 	
 
+
 	public RecruterEntity(long id, String name, String companyEmail, String companyDiscription,
-			String registrationNumber, String password, CompanyStatus status, Timestamp creationTime,
-			Timestamp updationTime, boolean is_active) {
+			String registrationNumber, String password, List<RecruiterJobsEntity> jobs, CompanyStatus status,
+			Timestamp creationTime, Timestamp updationTime, boolean is_active) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -131,10 +139,19 @@ public class RecruterEntity {
 		this.companyDiscription = companyDiscription;
 		this.registrationNumber = registrationNumber;
 		this.password = password;
+		this.jobs = jobs;
 		this.status = status;
 		this.creationTime = creationTime;
 		this.updationTime = updationTime;
 		this.is_active = is_active;
+	}
+
+	public List<RecruiterJobsEntity> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<RecruiterJobsEntity> jobs) {
+		this.jobs = jobs;
 	}
 
 	public CompanyStatus getStatus() {

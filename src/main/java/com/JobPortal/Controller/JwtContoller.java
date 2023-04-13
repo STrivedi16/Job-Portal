@@ -96,14 +96,13 @@ public class JwtContoller {
 			
 		}
 		catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.INVALID_USERNAME_PASSWORD, ErrorMessageKey.USER_EO311OO),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(e.getMessage(), ErrorMessageKey.USER_EO311OO),HttpStatus.BAD_REQUEST);
 			
 		}
 		
 		}
 		UserDetails details=this.customerUserDetailsSerice.loadUserByUsername(jwtRequest.getUsername());
 	
-		
 		
 		
 		String token=this.jwtTokenUtils.generateToken(details);

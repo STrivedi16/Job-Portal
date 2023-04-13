@@ -1,4 +1,4 @@
-package com.JobPortal.ServiceImpl;
+package com.JobPortal.ServiceInterface;
 
 import com.JobPortal.Dto.PermissionDto;
 

@@ -142,11 +142,14 @@ public class UserController {
 	public ResponseEntity<?> forgotPassword(@PathVariable("email") String email,@RequestBody UserDto dto) throws Exception
 	{
 		try {
+			
+			System.err.println("123123");
 			String password=this.service.forgotPassword(email, dto);
 			
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_PASSWROD_UPDATED, SuccessMessageKey.USER_M031103, password),HttpStatus.OK);
 		}
 		catch (ResourcesNotFoundException e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_PASSWROD_NOT_UPDATED, ErrorMessageKey.USER_E031103),HttpStatus.BAD_REQUEST);
 		}
 	}

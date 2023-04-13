@@ -9,6 +9,9 @@ public interface JobInterface {
 	public String getHelplineDetails();
 	public String getCompany();
 	public String getRequirement();
+	public String getState();
+	public String getCity();
+	
 	
 	
 }

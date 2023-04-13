@@ -1,4 +1,4 @@
-package com.JobPortal.ServiceImpl;
+package com.JobPortal.ServiceInterface;
 
 import java.util.ArrayList;
 import java.util.List;

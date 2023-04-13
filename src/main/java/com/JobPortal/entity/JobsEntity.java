@@ -63,6 +63,9 @@ public class JobsEntity {
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "jobEntity")
 	private List<UserJobsEntity> userJobsEntities;
 	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "jobs")
+	private List<RecruiterJobsEntity> recruiter;
+	
 	private long createdBy;
 	
 	
@@ -282,6 +285,39 @@ public class JobsEntity {
 		this.updationTime = updationTime;
 		this.is_active = is_active;
 		this.userJobsEntities = userJobsEntities;
+		this.createdBy = createdBy;
+	}
+
+	public List<RecruiterJobsEntity> getRecruiter() {
+		return recruiter;
+	}
+
+	public void setRecruiter(List<RecruiterJobsEntity> recruiter) {
+		this.recruiter = recruiter;
+	}
+
+	public JobsEntity(long id, String jobs, String role, String discription, String salary, String company,
+			String requirement, Timestamp dueDate, String helplineDetails, int opening, String city, String state,
+			Timestamp creationTime, Timestamp updationTime, boolean is_active, List<UserJobsEntity> userJobsEntities,
+			List<RecruiterJobsEntity> recruiter, long createdBy) {
+		super();
+		this.id = id;
+		this.jobs = jobs;
+		this.role = role;
+		this.discription = discription;
+		this.salary = salary;
+		this.company = company;
+		this.requirement = requirement;
+		this.dueDate = dueDate;
+		this.helplineDetails = helplineDetails;
+		this.opening = opening;
+		this.city = city;
+		this.state = state;
+		this.creationTime = creationTime;
+		this.updationTime = updationTime;
+		this.is_active = is_active;
+		this.userJobsEntities = userJobsEntities;
+		this.recruiter = recruiter;
 		this.createdBy = createdBy;
 	}
 
