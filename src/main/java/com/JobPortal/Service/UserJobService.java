@@ -48,14 +48,19 @@ public class UserJobService implements UserJobServiceImpl{
 	
 	public UserJobDto setUserJob(UserJobDto dto) throws Exception
 	{
+		
+		
 		UserEntity entity=this.userRepository.findById(dto.getUserId()).orElseThrow(()-> new Exception("user not found"));
 		
-		JobsEntity jobsEntity=this.jobRepository.findById(dto.getJobId()).orElseThrow(()-> new Exception("job not found "));
+		
+		JobsEntity jobsEntity=this.jobRepository.findById(dto.getJobId()).orElseThrow(()-> new Exception("job not found"));
+		
 		
 		UserJobsEntity entity2=new UserJobsEntity();
 		entity2.setUserEntity(entity);
 		entity2.setJobEntity(jobsEntity);
 		entity2.setStatus(Status.NONE);
+		dto.setStatus(Status.NONE);
 		
 		this.repository.save(entity2);
 	
@@ -100,27 +105,27 @@ public class UserJobService implements UserJobServiceImpl{
 		JobsEntity  jobs=this.jobRepository.findById(entity.getJobEntity().getId()).orElseThrow(()-> new Exception("Jobs not found"));
 		
 		
-		System.out.println(entity);
+		
 		
 	
 		entity.setStatus(dto.getStatus());
 		
-		System.err.println(dto.getStatus());
 		
 		
 		if(entity.getStatus().equals(Status.SELECTED))
 		{
-			System.err.println("In if condition +123131313131313131313131312312312313");
+			
 			int currentOpenig=jobs.getOpening();
-			System.err.println("currentOpenig from DB  "+currentOpenig);
+			
 			
 			int remain=currentOpenig-1;
 			
-			System.out.println("Remain = "+ remain);
+			
 			
 			jobs.setOpening(remain);
 			
 			this.jobRepository.save(jobs);
+			
 		}
 		
 		return this.repository.save(entity);

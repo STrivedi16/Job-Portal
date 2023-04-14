@@ -21,7 +21,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @SQLDelete(sql = "update jobs_entity set is_active=false where id=?")
 @Where(clause = "is_active=true")
-@Table(name = "JobsEntity" ,schema = "testing")
+@Table(name = "JobsEntity" )
 public class JobsEntity {
 
 	@Id

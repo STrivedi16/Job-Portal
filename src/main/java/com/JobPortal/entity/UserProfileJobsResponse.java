@@ -14,7 +14,7 @@ public class UserProfileJobsResponse {
 	
 	private String state;
 	
-	private List<UserProfileInterface>  expireance;
+	private Object expireance;
 	
 	private String jobs;
 	
@@ -57,15 +57,16 @@ public class UserProfileJobsResponse {
 
 	
 
-	public List<UserProfileInterface> getExpireance() {
+
+	
+
+	public Object getExpireance() {
 		return expireance;
 	}
 
-	public void setExpireance(List<UserProfileInterface> s) {
-		this.expireance = s;
+	public void setExpireance(Object expireance) {
+		this.expireance = expireance;
 	}
-
-	
 
 	public UserProfileJobsResponse() {
 		super();
@@ -99,6 +100,7 @@ public class UserProfileJobsResponse {
 		this.jobs = jobs;
 		this.role = role;
 	}
+
 
 	
 	

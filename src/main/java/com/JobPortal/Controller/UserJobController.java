@@ -50,12 +50,16 @@ public class UserJobController {
 	@PreAuthorize("hasAuthority	('applyforJobs')")
 	public ResponseEntity<?> userApplyJob(@RequestBody UserJobDto dto)
 	{
+		
+		
+		
 		try {
 			UserJobDto dto2=this.jobService.setUserJob(dto);
 			
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOB_APPLY, SuccessMessageKey.USER_JOB_M031701, dto2),HttpStatus.OK);
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_NOT_APPLY, ErrorMessageKey.USER_JOB_E031701),HttpStatus.BAD_REQUEST);
 		}
 	}

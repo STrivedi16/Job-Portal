@@ -28,7 +28,7 @@ import com.JobPortal.Service.CustomerUserDetailsSerice;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	
-	public final String PUBLIC_URL[]= {"/register","/login","/v3/api-docs"
+	public final static String PUBLIC_URL[]= {"/register","/login","/v3/api-docs"
 			,"/v2/api-docs"
 			,"/swagger-resources/**",
 			"/swagger-ui/**",
@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.cors().disable().csrf().disable()
-		.authorizeRequests().antMatchers(PUBLIC_URL).permitAll()
+		.authorizeRequests().antMatchers(WebSecurityConfig.PUBLIC_URL).permitAll()
 		.anyRequest().authenticated().and().httpBasic()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().exceptionHandling().authenticationEntryPoint(entryPoint);

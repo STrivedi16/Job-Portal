@@ -73,7 +73,7 @@ public class JobService {
 			return list;
 		}
 		
-		else {
+		else if(role==null && state==null){
 			
 		
 			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
@@ -84,6 +84,17 @@ public class JobService {
 			
 			return list;
 			
+		}
+		
+		else {
+			
+			org.springframework.data.domain.Pageable pageable=PageRequest.of(pagenumber, pagesize);
+			
+			Page<JobInterface> page=this.jobRepository.findByStatesIgnoreCaseAndRoleIgnoreCase(state, role, pageable, JobInterface.class);
+			
+			List<JobInterface> list=page.getContent();
+			
+			return list;
 		}
 		
 		
