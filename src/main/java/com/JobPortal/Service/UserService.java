@@ -23,7 +23,7 @@ import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.Responce.ResourcesNotFoundException;
 import com.JobPortal.ServiceInterface.UserServiceImpl;
 import com.JobPortal.entity.UserEntity;
-import com.netflix.discovery.converters.Auto;
+
 
 @Service
 public class UserService implements UserServiceImpl {
@@ -31,8 +31,8 @@ public class UserService implements UserServiceImpl {
 	@Autowired
 	private UserRepository repository;
 	
-	@Autowired
-	private RestTemplate restTemplate;
+//	@Autowired
+//	private RestTemplate restTemplate;
 
 	@Autowired
 	private BCryptPasswordEncoder  encoder;
@@ -175,6 +175,17 @@ public List<UserInterface> getAll(Integer pagesize, Integer pagenumber) {
 		this.repository.save(entity);
 	
 		return "password updated ";
+	}
+
+
+	@Override
+	public String deleteUser(long id) throws ResourcesNotFoundException {
+		
+		UserEntity entity=this.repository.findById(id).orElseThrow(()-> new ResourcesNotFoundException());
+		
+		this.repository.deleteById(entity.getId());
+		
+		return "user has been deleted"; 
 	}
 	
 	

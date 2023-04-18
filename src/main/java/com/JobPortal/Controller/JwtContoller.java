@@ -31,7 +31,7 @@ import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Responce.SuccessMessageToken;
 import com.JobPortal.Service.CustomerUserDetailsSerice;
 import com.JobPortal.interceptor.Interceptor;
-import com.netflix.discovery.converters.Auto;
+
 
 @RestController
 public class JwtContoller {

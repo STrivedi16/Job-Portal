@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.JobPortal.Dto.UserDto;
 import com.JobPortal.Interface.UserInterface;
+import com.JobPortal.Responce.ResourcesNotFoundException;
 
 @Service
 public interface UserServiceImpl {
@@ -23,6 +24,8 @@ public interface UserServiceImpl {
 	public ArrayList<SimpleGrantedAuthority> getAuthorities(long id );
 	
 	public String  forgotPassword(String email, UserDto dto) ;
+	
+	public String deleteUser(long id )throws ResourcesNotFoundException;
 	
 }
 

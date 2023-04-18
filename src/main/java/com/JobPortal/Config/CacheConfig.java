@@ -35,6 +35,9 @@ public class CacheConfig {
 	@Value("${spring.redis.port}")
 	private int port;
 	
+	@Value("${spring.redis.host}")
+	private String host;
+	
 	public CacheConfig() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -45,7 +48,7 @@ public class CacheConfig {
 		RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
 		
 		LOG.info("Caching is invoked... ");
-		configuration.setHostName("localhost");
+		configuration.setHostName(host);
 		configuration.setPort(port);
 		return new LettuceConnectionFactory(configuration);
 

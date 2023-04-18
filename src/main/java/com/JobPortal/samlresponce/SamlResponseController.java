@@ -2,7 +2,7 @@ package com.JobPortal.samlresponce;
 
 import java.util.List;
 
-import org.apache.http.protocol.HTTP;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,6 @@ import com.JobPortal.Model.JwtResponce;
 import com.JobPortal.Responce.ErrorMessage;
 import com.JobPortal.Responce.SuccessMessageToken;
 import com.JobPortal.Service.CustomerUserDetailsSerice;
-import com.netflix.discovery.converters.Auto;
 
 @RestController
 public class SamlResponseController {

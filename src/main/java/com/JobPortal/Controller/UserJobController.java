@@ -3,6 +3,8 @@ package com.JobPortal.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,25 +66,23 @@ public class UserJobController {
 		}
 	}
 	
-	@GetMapping("/user/jobs/{id}")
+	@GetMapping("/user/jobs")
 	//@PreAuthorize("hasAuthority	('applyforJobs')")
-	public ResponseEntity<?> showUserJob(@PathVariable("id") long id , 
+	public ResponseEntity<?> showUserJob(HttpServletRequest request , 
 			@RequestParam(name = "pagenumber", defaultValue = "0",required = false)Integer pagenumber,
 			@RequestParam(name="pagesize",defaultValue = "5",required = false)Integer pagesize
 			)
 	{
 		try {
 			
-			if(filter.id==id)
-			{
+			long id= (long) request.getAttribute("userId");
 			
 			List<UserJobInterface> list=this.jobService.getUserJob(id, pagenumber, pagesize);
 	
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOBS, SuccessMessageKey.USER_JOB_M031702, list),HttpStatus.BAD_REQUEST);
 			}
 			
-			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, ErrorMessageKey.ACCESS_DENIED),HttpStatus.NOT_ACCEPTABLE);
-		}
+			
 		catch (ResourcesNotFoundException e) {
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.JOB_NOT_FOUND, ErrorMessageKey.JOB_E031602),HttpStatus.BAD_REQUEST);
 		}
@@ -140,7 +140,7 @@ public class UserJobController {
 	{
 		try {
 			
-			System.err.println("aaaaasassasasa");
+			
 			
 			UserJobsEntity entity=this.jobService.updateStatus(id, dto);
 			
@@ -152,14 +152,13 @@ public class UserJobController {
 			
 			String subject="Application Status Change";
 			
-			System.err.println("aaaaasassasasa");
 			
 			String to=entity.getUserEntity().getEmail();
 			
 			this.emailService.sendOtp(subject, message, to);
 			
 			
-			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOB_STATUS, SuccessMessageKey.USER_JOB_M031704, entity),HttpStatus.OK);
+			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOB_STATUS, SuccessMessageKey.USER_JOB_M031704, entity.getStatus()),HttpStatus.OK);
 		}
 		catch (Exception e) {
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_JOB_STATUS, ErrorMessageKey.USER_JOB_E031704),HttpStatus.BAD_REQUEST);
@@ -168,23 +167,20 @@ public class UserJobController {
 	
 		
 	
-	@GetMapping("/applyCandidate/{id}")
+	@GetMapping("/applyCandidate")
 	@PreAuthorize("hasAuthority	('showUserJobs')")
-	public ResponseEntity<?> getApplyCandidates(@PathVariable("id") long id )
+	public ResponseEntity<?> getApplyCandidates(HttpServletRequest request)
 	{
 		
 		try {
 			
-			if(filter.id==id)
-			{
+			long id= (long) request.getAttribute("userId");
 			
 			ArrayList<UserProfileJobsResponse>  list=this.jobService.getCandidates(id);
 			
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOBS, SuccessMessageKey.USER_JOB_M031702, list),HttpStatus.OK);
 			}
 			
-			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, ErrorMessageKey.ACCESS_DENIED),HttpStatus.NOT_ACCEPTABLE);
-		}
 		
 		catch (ResourcesNotFoundException e) {
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.JOB_NOT_FOUND, ErrorMessageKey.JOB_E031602),HttpStatus.BAD_REQUEST);

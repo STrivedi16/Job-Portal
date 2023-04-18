@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import com.netflix.discovery.converters.Auto;
+
 
 @RestController
 public class PdfContoller {

@@ -14,10 +14,11 @@ import com.JobPortal.Config.JwtFilter;
 import com.JobPortal.Dto.JobDto;
 import com.JobPortal.Interface.JobInterface;
 import com.JobPortal.Repository.JobRepository;
+import com.JobPortal.ServiceInterface.JobServiceInterface;
 import com.JobPortal.entity.JobsEntity;
 
 @Service
-public class JobService {
+public class JobService implements JobServiceInterface{
 
 	@Autowired
 	private JobRepository jobRepository;

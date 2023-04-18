@@ -47,13 +47,15 @@ public class Interceptor implements HandlerInterceptor {
 			
 			ArrayList<SimpleGrantedAuthority> permissions=this.service.getAuthorities(entity.getId());
 		
-			 request.setAttribute("permissions", permissions);
-			 
-			 System.err.println(permissions);
-			 
-			 ArrayList<SimpleGrantedAuthority>  permission= (ArrayList<SimpleGrantedAuthority>) request.getAttribute("permissions");
-			 
-			 System.err.println("Get it from interceptor"+permission);
+//			 request.setAttribute("permissions", permissions);
+//			 
+//			 System.err.println(permissions);
+//			 
+//			 ArrayList<SimpleGrantedAuthority>  permission= (ArrayList<SimpleGrantedAuthority>) request.getAttribute("permissions");
+//			 
+//			 System.err.println("Get it from interceptor"+permission);
+			
+			request.setAttribute("userId", entity.getId());
 		
 		}
 		

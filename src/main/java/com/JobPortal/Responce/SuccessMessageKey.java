@@ -23,6 +23,7 @@ public class SuccessMessageKey {
 	public static final String USER_M031102=HEADER+USER+"02";//user detail fetched
 	public static final String USER_M031103=HEADER+USER+"03";// password updated successfully
 	public static final String USER_M031104=HEADER+USER+"04";// user delete
+
 	
 	// user role
 	public static final String USER_ROLE_M031301=HEADER+USER_ROLE+"01";//user role added

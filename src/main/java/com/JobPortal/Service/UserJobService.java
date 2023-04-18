@@ -25,7 +25,7 @@ import com.JobPortal.entity.JobsEntity;
 import com.JobPortal.entity.UserEntity;
 import com.JobPortal.entity.UserJobsEntity;
 import com.JobPortal.entity.UserProfileJobsResponse;
-import com.netflix.discovery.converters.Auto;
+
 
 import io.swagger.v3.oas.models.examples.Example;
 
@@ -41,9 +41,9 @@ public class UserJobService implements UserJobServiceImpl{
 	@Autowired
 	private UserJobRepository repository;
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
+//	@Autowired
+//	private RestTemplate restTemplate;
+//	
 
 	
 	public UserJobDto setUserJob(UserJobDto dto) throws Exception
@@ -245,7 +245,7 @@ public class UserJobService implements UserJobServiceImpl{
 	        try {
 	        
 	        String url = "http://Profile-Service/api/user/profile/" + userId;
-	        List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
+	     //  List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
 	        
 	        String expireance = null;
 //	        
@@ -255,7 +255,7 @@ public class UserJobService implements UserJobServiceImpl{
 	        response.setState(state);
 	        response.setJobs(job);
 	        response.setRole(role);
-	        response.setExpireance(s);
+	        response.setExpireance(null);
 	        al.add(response);
 	        
        }

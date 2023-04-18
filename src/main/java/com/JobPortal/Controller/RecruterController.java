@@ -27,7 +27,7 @@ import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Service.RecrutorService;
 import com.JobPortal.entity.CompanyStatus;
 import com.JobPortal.entity.RecruterEntity;
-import com.netflix.discovery.converters.Auto;
+
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 

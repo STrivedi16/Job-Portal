@@ -21,7 +21,7 @@ import com.JobPortal.Repository.SkillsRepository;
 import com.JobPortal.Repository.UserRepository;
 import com.JobPortal.entity.Skills;
 import com.JobPortal.entity.UserEntity;
-import com.netflix.discovery.converters.Auto;
+
 
 @Service
 public class FileHelperService {
@@ -57,12 +57,13 @@ public class FileHelperService {
 		}
 	}
 	
-	public void saveUser(MultipartFile file)
+	public void saveUser(MultipartFile file) throws Exception
 	{
 		try {
 			if(fileService.checkFileFormat(file))
 			{
 				List<UserEntity> list=fileService.setData(file);
+				this.repository.saveAll(list);
 			}
 			else {
 				throw new Exception("file not matched");
@@ -70,6 +71,7 @@ public class FileHelperService {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			throw new Exception("file data  not stored");
 		}
 	}
 	

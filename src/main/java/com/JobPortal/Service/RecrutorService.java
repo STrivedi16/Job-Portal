@@ -13,7 +13,7 @@ import com.JobPortal.ServiceInterface.RecruterServiceImpl;
 import com.JobPortal.entity.CompanyStatus;
 import com.JobPortal.entity.RecruterEntity;
 import com.JobPortal.entity.UserEntity;
-import com.netflix.discovery.converters.Auto;
+
 
 @Service
 public class RecrutorService implements RecruterServiceImpl {

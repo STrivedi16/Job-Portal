@@ -2,10 +2,13 @@ package com.JobPortal.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +29,7 @@ import com.JobPortal.Responce.ResourcesNotFoundException;
 import com.JobPortal.Responce.SuccessMessage;
 import com.JobPortal.Responce.SuccessMessageConstant;
 import com.JobPortal.Responce.SuccessMessageKey;
+import com.JobPortal.Responce.SuccessMsg;
 import com.JobPortal.Service.UserService;
 import com.JobPortal.entity.UserEntity;
 
@@ -69,16 +73,14 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("/user/{id}")
-	public ResponseEntity<?> getUserData(@PathVariable("id") long id)
+	@GetMapping("/user")
+	public ResponseEntity<?> getUserData(HttpServletRequest request)
 	{
 		
 		try {
 			
 			
-			
-			if(filter.id==id)
-			{
+			long id= (long) request.getAttribute("userId");
 			
 			//List<UserInterface> list=this.service.getUserDetails(id);
 			List<UserInterface> list=this.service.getUserDetailsProfile(id);
@@ -88,8 +90,7 @@ public class UserController {
 			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_DETAILS, SuccessMessageKey.USER_M031102, list),HttpStatus.OK);
 		}
 			
-			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, ErrorMessageKey.ACCESS_DENIED),HttpStatus.BAD_REQUEST);
-		}
+			
 		catch (ResourcesNotFoundException e) {
 			
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_NOT_FOUND, ErrorMessageKey.USER_E031102),HttpStatus.BAD_REQUEST);
@@ -118,7 +119,7 @@ public class UserController {
 	@PreAuthorize("hasAuthority	('showUser')")
 	public ResponseEntity<?> getAllUsers(
 			@RequestParam(name = "pagenumber",defaultValue = "0",required = false)Integer pagenumber,
-			@RequestParam(name = "pagenumber",defaultValue = "5",required = false)Integer pagesize
+			@RequestParam(name = "pagesize",defaultValue = "10",required = false)Integer pagesize
 			)
 	{
 		
@@ -152,6 +153,23 @@ public class UserController {
 		catch (ResourcesNotFoundException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_PASSWROD_NOT_UPDATED, ErrorMessageKey.USER_E031103),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	@DeleteMapping("/deleteUser")
+	@PreAuthorize("hasAuthority	('delete')")
+	public ResponseEntity<?> deleteUser(@PathVariable("id") long id )
+	{
+		try {
+			
+			String user=this.service.deleteUser(id);
+			
+			return new ResponseEntity<>(new SuccessMsg(SuccessMessageConstant.USER_DELETED, SuccessMessageKey.USER_M031104),HttpStatus.OK);
+		}
+		catch (ResourcesNotFoundException e) {
+			
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_NOT_DELETED, ErrorMessageKey.USER_E031104),HttpStatus.BAD_REQUEST);
 		}
 	}
 	
