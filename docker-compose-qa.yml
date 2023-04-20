@@ -1,0 +1,51 @@
+version:  '3'
+services:
+  dbservice: 
+    image: postgres:latest
+    container_name: my_postgres_container
+    restart: always
+    environment: 
+        - postgres_user=${POSTGRES_USER}
+        - postgres_password=${POSTGRES_PASSWORD}
+        - postgres_dv=${POSTGRES_DB}
+      
+    volumes: 
+        - ./data:/var/lib/postgresql
+    ports:
+        - 5001:5432
+        
+  
+  
+  
+  appservice: 
+      build: .
+      depends_on: 
+        - dbservice
+        - redisservice
+      environment:
+        - spring.datasource.url=${SPRING.DATASOURCE.URL} 
+        - spring.datasource.username=${SPRING.DATASOURCE.USERNAME}
+        - spring.datasource.password=${SPRING.DATASOURCE.PASSWORD}
+        - spring.datasource.driver-class-name=${SPRING.DATASOURCE.DRIVER-CLASS-NAME}
+        - spring.jpa.properties.hibernate.dialect=${SPRING.JPA.PROPERTIES.HIBERNATE.DIALECT}
+        -  spring.redis.port=${SPRING.REDIS.PORT}
+        - spring.redis.host=${SPRING_REDIS_HOST}
+        
+      command: bash -c "while !</dev/tcp/dbservice/5432; do sleep 1; done; java -jar myJar.jar migrate"
+        
+      ports:
+        - 9001:8080
+           
+ 
+      
+      
+  redisservice:
+      image: redis:latest
+      container_name: my_redis_container
+      restart: always
+      environment:
+        - spring.redis.port=${SPRING.REDIS.PORT}
+        - spring.redis.host=127.0.0.1
+      ports:
+        - 6379:6379 
+ 

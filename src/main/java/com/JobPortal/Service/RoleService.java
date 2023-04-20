@@ -24,4 +24,11 @@ public class RoleService implements RoleServiceImpl {
 		return dto;
 		
 	}
+	
+	public String deleteRole(long id)
+	{
+		this.repository.deleteById(id);
+		
+		return "role deleted";
+	}
 }

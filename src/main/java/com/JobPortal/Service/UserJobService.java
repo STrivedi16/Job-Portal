@@ -43,7 +43,7 @@ public class UserJobService implements UserJobServiceImpl{
 	
 //	@Autowired
 //	private RestTemplate restTemplate;
-//	
+	
 
 	
 	public UserJobDto setUserJob(UserJobDto dto) throws Exception

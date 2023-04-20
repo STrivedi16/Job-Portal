@@ -48,7 +48,7 @@ public class CacheConfig {
 		RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
 		
 		LOG.info("Caching is invoked... ");
-		configuration.setHostName(host);
+		configuration.setHostName("127.0.0.1");
 		configuration.setPort(port);
 		return new LettuceConnectionFactory(configuration);
 

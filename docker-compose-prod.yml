@@ -1,0 +1,48 @@
+version:  '3'
+services:
+  dbservice: 
+    image: postgres:latest
+    container_name: my_postgres_container
+    restart: always
+    environment: 
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=root
+        - POSTGRES_DB=JobPortal.prod
+      
+    volumes: 
+        - ./data:/var/lib/postgresql
+    ports:
+        - 5040:5432
+        
+  
+  
+  
+  appservice: 
+      build: .
+      depends_on: 
+        - dbservice
+        - redisservice
+      environment:
+        - spring.datasource.url=jdbc:postgresql://dbservice:5432/JobPortal.prod
+        - spring.datasource.username=postgres
+        - spring.datasource.password=root
+        - spring.datasource.driver-class-name=org.postgresql.Driver
+        - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+        -  spring.redis.port=6379
+        - spring.redis.host=redisservice 
+      ports:
+        - 9091:8080
+           
+ 
+      
+      
+  redisservice:
+      image: redis:latest
+      container_name: my_redis_container
+      restart: always
+      environment:
+        - spring.redis.port=6379
+        - spring.redis.host=127.0.0.1
+      ports:
+        - 6379:6379 
+ 
