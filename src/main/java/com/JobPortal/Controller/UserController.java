@@ -45,7 +45,7 @@ public class UserController {
 	@Autowired
 	private JwtFilter filter;
 	
-	@PostMapping("/register")
+	@PostMapping("/user/register")
 	public ResponseEntity<?> register(@RequestBody  UserDto dto)
 	{
 		boolean password=this.passwordVerification.verifyPassword(dto.getPassword());
@@ -139,7 +139,7 @@ public class UserController {
 	
 	
 	
-	@PatchMapping("/forgotpassword/{email}")
+	@PatchMapping("/user/forgotpassword/{email}")
 	public ResponseEntity<?> forgotPassword(@PathVariable("email") String email,@RequestBody UserDto dto) throws Exception
 	{
 		try {
@@ -157,7 +157,7 @@ public class UserController {
 	}
 	
 	
-	@DeleteMapping("/deleteUser")
+	@DeleteMapping("/deleteUser/{id}")
 	@PreAuthorize("hasAuthority	('delete')")
 	public ResponseEntity<?> deleteUser(@PathVariable("id") long id )
 	{

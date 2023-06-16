@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.JobPortal.Repository.UserRepository;
+import com.JobPortal.entity.UserEntity;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -67,6 +68,19 @@ public class JwtTokenUtils implements Serializable{
 		return (String)claims.get("Type");
 	}
 	
+	public String getUserEmailFromToken(String token)
+	{
+		Claims claims=Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		
+		return (String)claims.get("email");
+	}
+	
+	public long getUserIdFromToken(String token)
+	{
+		Claims claims=Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		
+		return (long)claims.get("id");
+	}
 	
 	public boolean isTokenExpired(String token)
 	{
@@ -82,11 +96,32 @@ public class JwtTokenUtils implements Serializable{
 		
 		
 		
-		
 		map.put("Type", TYPE);
+		
 		
 		return dogenerate(map,details.getUsername());
 		
+	}
+	
+	
+	public String generateRedisToken(UserEntity details)
+	{
+		Map<String , Object> map=new HashMap<>();
+		map.put("email", details.getEmail());
+		map.put("id", details.getId());
+		
+		
+		System.err.println("generating redis token");
+		
+		return dogenerate(map, details.getEmail());
+	}
+	
+	private String dogenerate(Map<String, Object>claim)
+	{
+		
+	
+		
+		return Jwts.builder().setClaims(claim).signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 	
 	private String dogenerate(Map<String, Object>claim,String objcet)

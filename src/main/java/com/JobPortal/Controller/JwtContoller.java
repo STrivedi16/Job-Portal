@@ -66,6 +66,8 @@ public class JwtContoller {
 //		return listPermission;
 //	}
 	
+	public String token;
+	
 	@PostMapping("/login")
 	public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest)
 	{
@@ -105,11 +107,13 @@ public class JwtContoller {
 	
 		
 		
-		String token=this.jwtTokenUtils.generateToken(details);
+		 token=this.jwtTokenUtils.generateToken(details);
 		
 		String reftoken=this.jwtRefreshToken.generateReftoken(details);
 		
-		return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.USER_LOGIN, SuccessMessageKey.USER_MO311OO, token, reftoken),HttpStatus.OK);
+		//ArrayList<String> permissions=this.customerUserDetailsSerice.getPermissionById(1);
+		
+		return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.USER_LOGIN, SuccessMessageKey.USER_MO311OO, token, reftoken,null),HttpStatus.OK);
 		
 		
 		}

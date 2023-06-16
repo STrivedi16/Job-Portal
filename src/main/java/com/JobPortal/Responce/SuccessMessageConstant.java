@@ -9,7 +9,7 @@ public class SuccessMessageConstant {
 	public static final String DELETE="delete";
 	
 	public static final String OTP_SENT="otp has been send successfull";
-	
+	public static final String TOKEN_GENERATED="access token generate successfull";
 	//USER
 	public static final String USER_REGISTER="user register sucessfull";
 	public static final String USER_LOGIN="user login successfull";
@@ -48,5 +48,7 @@ public class SuccessMessageConstant {
 	
 	public static final String RECRUTER_ADD="recruter added successfull";
 	public static final String RECRUTER_STATUS="status has updated successfull";
+	public static final String RECRUTER_DETAILS="recruiter detils fetch successfull";
+	
 	
 }

@@ -23,6 +23,7 @@ import com.JobPortal.Responce.ErrorMessageKey;
 import com.JobPortal.Responce.SuccessMessageConstant;
 import com.JobPortal.Responce.SuccessMessageKey;
 import com.JobPortal.Responce.SuccessMsg;
+import com.netflix.discovery.converters.Auto;
 
 @RestController
 public class FileController {
@@ -32,6 +33,8 @@ public class FileController {
 
 	@Autowired
 	private FileHelperService service;
+	
+	
 	
 	
 	@PostMapping("/skillsFile")
@@ -123,6 +126,36 @@ public class FileController {
 		return  this.fileService.uploadCsv(file);
 	}
 
+	@PostMapping("/multitableFile")
+	@PreAuthorize("hasAuthority	('uploadFile')")
+	public ResponseEntity<?> addDataToMultiTable(@RequestParam("file") MultipartFile file)
+	{
+		
+
+		
+		try {
+			if(file.isEmpty())
+			{
+				
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_PROPER, ErrorMessageKey.FILE_E031802),HttpStatus.NOT_ACCEPTABLE);
+
+			}
+			
+			else if(fileService.checkFileFormat(file))
+			{
+				this.fileService.setDataInMultitable(file);
+				return new ResponseEntity<>(new SuccessMsg(SuccessMessageConstant.FILE_UPLOAD, SuccessMessageKey.FILE_M031901),HttpStatus.OK);
+				
+			}
+			
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_PROPER, ErrorMessageKey.FILE_E031802),HttpStatus.NOT_ACCEPTABLE);
+
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_STORED, ErrorMessageKey.FILE_E031801),HttpStatus.BAD_REQUEST);
+
+		}
+	}
 
 
 }

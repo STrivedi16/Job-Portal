@@ -65,9 +65,11 @@ public class RecruterController {
 	
 	@PatchMapping("/recruiter/{id}")
 	@PreAuthorize("hasAuthority	('recruiterStatus')")
-	public ResponseEntity<?> updateStatus(@PathVariable("id") long id , @RequestBody RecruterStatusDto  dto) throws MessagingException 
+	public ResponseEntity<?> updateStatus(@PathVariable("id") long id , @org.springframework.web.bind.annotation.RequestBody RecruterStatusDto  dto) throws MessagingException 
 	{
 		try {
+			
+			System.err.println(dto.getStatus());
 			
 			RecruterEntity entity=this.recrutorService.updateStatus(id, dto);
 			

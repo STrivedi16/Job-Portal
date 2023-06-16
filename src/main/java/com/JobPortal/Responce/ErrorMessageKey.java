@@ -14,11 +14,15 @@ public class ErrorMessageKey {
 	private static final String USER_JOB="17";
 	private static final String FILE="18";	
 	private static final String RECRUITER="19";
+	private static final String TOKEN="21";
+	
 	
 	
 	public static final String REQUEST_E0300=HEADER+"00";// requset incorrect
 
 	public static final String ACCESS_DENIED=HEADER+USER+"001";
+	
+	public static final String TOKEN_E032100=HEADER+TOKEN+"00";	
 	
 	//USER
 	public static final String USER_EO311OO=HEADER+USER+"00";// not login
@@ -37,6 +41,7 @@ public class ErrorMessageKey {
 	
 	//role permission
 	public static final String PERMISSION_E031401=HEADER+PERMISSION+"01";//permission not stored
+	public static final String PERMISSION_E031402=HEADER+PERMISSION+"02";// permission not delete
 	public static final String ROLE_PERMISSION_E031501=HEADER+ROLE_PERMISSION+"01";// role permission not stored
 	
 	//job 

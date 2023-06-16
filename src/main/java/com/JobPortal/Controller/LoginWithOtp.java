@@ -1,6 +1,7 @@
 package com.JobPortal.Controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class LoginWithOtp {
 	
 	@Autowired
 	private UserRepository repository;
+	
+
 
 	@PostMapping("/loginWithOtp")
 	public ResponseEntity<?> loginWithOtp(@RequestBody LoginDto dto)
@@ -69,7 +72,9 @@ public class LoginWithOtp {
 						
 						this.otpService.clearOtp(entity.getEmail());
 						
-						return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.USER_LOGIN, SuccessMessageKey.USER_MO311OO, token, reftoken),HttpStatus.OK);
+						ArrayList<String> permission=this.serice.getPermissionById(entity2.getId());
+						
+						return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.USER_LOGIN, SuccessMessageKey.USER_MO311OO, token, reftoken, permission),HttpStatus.OK);
 					
 					}
 						

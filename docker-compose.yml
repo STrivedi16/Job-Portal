@@ -6,7 +6,7 @@ services:
     container_name: my_postgres_container
     restart: always
     env_file: 
-      - ./jobportal.env
+      - ./.env
    
     volumes: 
       - ./data:/var/lib/postgresql
@@ -19,7 +19,7 @@ services:
       - dbservice
       - redisservice
     env_file: 
-      - ./jobportal.env
+      - ./.env
     
     command: bash -c "while !</dev/tcp/dbservice/5432; do sleep 1; done; java -jar myJar.jar migrate"  
     ports:
@@ -30,6 +30,6 @@ services:
     container_name: my_redis_container
     restart: always
     env_file:
-      - ./jobportal.env
+      - ./.env
     ports:
       - 6379:6379

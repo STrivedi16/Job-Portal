@@ -24,4 +24,12 @@ public class PermissionService implements PermissionServiceImpl{
 		
 		return dto;
 	}
+
+	@Override
+	public String deletePermission(long id) {
+		
+		this.permissionsRepository.deleteById(id);
+		
+		return "permission deleted";
+	}
 }

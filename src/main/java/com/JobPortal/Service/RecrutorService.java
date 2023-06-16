@@ -1,5 +1,7 @@
 package com.JobPortal.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -65,9 +67,11 @@ public class RecrutorService implements RecruterServiceImpl {
 		
 		RecruterEntity entity=this.recruterRepo.findById(id).orElseThrow(()-> new ResourcesNotFoundException());
 		
+		System.err.println(dto.getStatus());
+		
 		entity.setStatus(dto.getStatus());
 		
-		if(entity.getStatus().equals(CompanyStatus.REGISTER))
+		if(dto.getStatus().equals(CompanyStatus.REGISTER))
 		{
 			UserEntity entity2=new  UserEntity();
 			
@@ -77,7 +81,7 @@ public class RecrutorService implements RecruterServiceImpl {
 			
 			this.userRepository.save(entity2);
 		}
-		else if(entity.getStatus().equals(CompanyStatus.REGECTED)){
+		else if(dto.getStatus().equals(CompanyStatus.REGECTED)){
 			
 			entity.setCompanyEmail(null);
 			entity.setCompanyDiscription(null);
@@ -98,9 +102,17 @@ public class RecrutorService implements RecruterServiceImpl {
 
 
 	@Override
-	public RecruterDto getDetails() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RecruterDto> getDetails() throws Exception {
+		
+		List<RecruterDto>  list =this.recruterRepo.findAll(RecruterDto.class);
+		
+		if(list==null)
+		{
+			throw new Exception();
+		}
+		
+		return list;
+		
 	}
 	
 	
