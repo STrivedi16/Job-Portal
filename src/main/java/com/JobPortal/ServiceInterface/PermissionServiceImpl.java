@@ -6,4 +6,7 @@ public interface PermissionServiceImpl {
 
 	
 	public PermissionDto setPermission(PermissionDto dto);
+	
+	public String deletePermission(long id);
+	
 }

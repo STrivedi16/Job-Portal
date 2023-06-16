@@ -14,6 +14,11 @@ public class SuccessMessageKey {
 	private static final String OTP="18";
 	private static final String FILE="19";
 	private static final String RECUTER="20";
+	private static final String TOKEN="21";
+	
+	
+	public static final String TOKEN_M032100=HEADER+TOKEN+"00";
+	
 	
 	public static final String OTP_M031800=HEADER+OTP+"00";
 	
@@ -35,6 +40,7 @@ public class SuccessMessageKey {
 	
 	//role permission
 	public static final String PERMISSION_M031401=HEADER+PERMISSION+"01";//permission added
+	public static final String PERMISSION_M031402=HEADER+PERMISSION+"02";// permission deleted
 	public static final String ROLE_PERMISSION_M031501=HEADER+ROLE_PERMISSION+"01";// role permission added
 	
 	//job 
@@ -54,6 +60,6 @@ public class SuccessMessageKey {
 	
 	public static final String RECRUTER_M032001=HEADER+RECUTER+"01";//recruter add successfull
 	public static final String RECRUTER_M032002=HEADER+RECUTER+"02";// recruter status updated successfull
-	
+	public static final String RECRUTER_M032003=HEADER+RECUTER+"03";// recruter details fetch successfull
 
 }

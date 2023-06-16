@@ -15,8 +15,9 @@ public class SuccessMessageToken {
 	
 	private String refToken;
 	
-	private ArrayList<SimpleGrantedAuthority> permission;
-
+	private ArrayList<String> permission;
+	
+	
 	public String getSuccessMessage() {
 		return successMessage;
 	}
@@ -49,29 +50,23 @@ public class SuccessMessageToken {
 		this.refToken = refToken;
 	}
 
-	public SuccessMessageToken(String successMessage, String successKey, String token, String refToken) {
-		super();
-		this.successMessage = successMessage;
-		this.successKey = successKey;
-		this.token = token;
-		this.refToken = refToken;
-	}
+	
 
 	public SuccessMessageToken() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArrayList<SimpleGrantedAuthority> getPermission() {
+	public ArrayList<String> getPermission() {
 		return permission;
 	}
 
-	public void setPermission(ArrayList<SimpleGrantedAuthority> permission) {
+	public void setPermission(ArrayList<String> permission) {
 		this.permission = permission;
 	}
 
 	public SuccessMessageToken(String successMessage, String successKey, String token, String refToken,
-			ArrayList<SimpleGrantedAuthority> permission) {
+			ArrayList<String> permission) {
 		super();
 		this.successMessage = successMessage;
 		this.successKey = successKey;
@@ -79,6 +74,8 @@ public class SuccessMessageToken {
 		this.refToken = refToken;
 		this.permission = permission;
 	}
+
+	
 
 	
 	

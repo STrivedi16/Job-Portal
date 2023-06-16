@@ -68,9 +68,9 @@ public class JwtFilter extends OncePerRequestFilter{
 						
 						username=this.jwtTokenUtils.getUsernameFromToken(jwtToken);
 						
-						UserEntity entity=this.repository.findByEmailIgnoreCase(username);
-						
-						id=entity.getId();
+//						UserEntity entity=this.repository.findByEmailIgnoreCase(username);
+//						
+//						id=entity.getId();
 						
 						
 					}

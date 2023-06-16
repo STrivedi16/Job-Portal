@@ -1,5 +1,7 @@
 package com.JobPortal.Config;
 
+import java.time.Duration;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class RedisServer {
 	public void addInCache(String key1, String key2, Object val)
 	{
 		cc.redisTemplate().opsForHash().put(key1, key2, val);
+//		cc.redisTemplate().expire(key2, Duration.ofMinutes(1));
 	}
 	
 	public Object getFromCache(String key1, String key2)

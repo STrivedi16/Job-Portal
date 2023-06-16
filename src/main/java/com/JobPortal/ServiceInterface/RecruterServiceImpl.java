@@ -1,5 +1,7 @@
 package com.JobPortal.ServiceInterface;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.JobPortal.Dto.RecruterDto;
@@ -18,5 +20,5 @@ public interface RecruterServiceImpl {
 
 	RecruterEntity updateStatus(long id, RecruterStatusDto dto) throws Exception;
 	
-	RecruterDto getDetails();
+	public List<RecruterDto> getDetails() throws Exception;
 }

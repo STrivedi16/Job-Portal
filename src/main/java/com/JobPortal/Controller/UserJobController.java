@@ -188,6 +188,27 @@ public class UserJobController {
 		}
 	}
 	
+	@GetMapping("/applyCandidate/{id}")
+	@PreAuthorize("hasAuthority	('showUserJobs')")
+	public ResponseEntity<?> getApplyCandidate(@PathVariable("id") long id)
+	{
+		
+		try {
+			
+			
+			
+			ArrayList<UserProfileJobsResponse>  list=this.jobService.getCandidates(id);
+			
+			return new ResponseEntity<>(new SuccessMessage(SuccessMessageConstant.USER_JOBS, SuccessMessageKey.USER_JOB_M031702, list),HttpStatus.OK);
+			}
+			
+		
+		catch (ResourcesNotFoundException e) {
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.JOB_NOT_FOUND, ErrorMessageKey.JOB_E031602),HttpStatus.BAD_REQUEST);
+
+		}
+	}
+	
 	
 	}
 

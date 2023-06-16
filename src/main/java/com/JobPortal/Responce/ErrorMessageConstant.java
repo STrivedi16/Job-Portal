@@ -12,6 +12,9 @@ public static final String REQUEST_ERROR = "http request not proper";
 	
 	public static final String ACCESS_DENIED="you can not show other details";
 	
+	public static final String TOKEN_NOT_GENERATE="access token not generate";
+	
+	
 	//USER
 	public static final String INVALID_USERNAME_PASSWORD="invalid username or password";
 	public static final String USER_NOT_REGISTER="user not redister";
@@ -32,6 +35,7 @@ public static final String REQUEST_ERROR = "http request not proper";
 	
 	public static final String PERMISSION_NOT_STORED="permission not stored";
 	public static final String PERMISSION_REMOVE_DENIED="can't remove permission";
+	public static final String PERMISSION_NOT_DELETED="permission not delete ";
 	
 	//JOB
 	

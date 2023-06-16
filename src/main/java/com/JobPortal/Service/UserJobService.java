@@ -41,8 +41,8 @@ public class UserJobService implements UserJobServiceImpl{
 	@Autowired
 	private UserJobRepository repository;
 	
-//	@Autowired
-//	private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 
 	
@@ -244,8 +244,8 @@ public class UserJobService implements UserJobServiceImpl{
 	        
 	        try {
 	        
-	        String url = "http://Profile-Service/api/user/profile/" + userId;
-	     //  List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
+	        String url = "http://Profile-Service/api/profile/" + userId;
+	      List<UserProfileInterface> s = this.restTemplate.getForObject(url, List.class);
 	        
 	        String expireance = null;
 //	        
@@ -255,11 +255,13 @@ public class UserJobService implements UserJobServiceImpl{
 	        response.setState(state);
 	        response.setJobs(job);
 	        response.setRole(role);
-	        response.setExpireance(null);
+	        response.setExpireance(s);
 	        al.add(response);
 	        
        }
 	        catch (Exception e) {
+	        	
+	        	
 	        	
 //	        	e.printStackTrace();
 	        	response.setName(name);
@@ -268,7 +270,7 @@ public class UserJobService implements UserJobServiceImpl{
 		        response.setState(state);
 		        response.setJobs(job);
 		        response.setRole(role);
-		        response.setExpireance(null);
+		        response.setExpireance(e.getMessage());
 		        al.add(response);
 			}
 	        
